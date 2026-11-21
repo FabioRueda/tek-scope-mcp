@@ -1,0 +1,17 @@
+# Machine-specific data: instrument serial number, reports, backups, logs, manual PDF.
+# Never commit anything from here. See CLAUDE.md.
+local/
+
+# The Tektronix manual is not redistributed in this repository.
+*.pdf
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Tools
+.claude/settings.local.json
+graphify-out/
