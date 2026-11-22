@@ -70,6 +70,19 @@ def test_blocked_write_is_refused_and_not_sent(scope, tmp_path):
     assert "REFUSED" in (tmp_path / "writes.log").read_text(encoding="utf-8")
 
 
+def test_query_with_set_command_is_logged_as_write(scope, tmp_path):
+    scope.resource.answers = {"CH1:SCAle 1;*OPC?": "1"}
+    scope.query("CH1:SCAle 1;*OPC?")
+    assert "WRITE\tCH1:SCAle 1;*OPC?" in (tmp_path / "writes.log").read_text(encoding="utf-8")
+
+
+def test_pure_query_is_not_logged(scope, tmp_path):
+    scope.resource.answers = {"*IDN?": "x"}
+    scope.query("*IDN?")
+    log = tmp_path / "writes.log"
+    assert not log.exists() or "*IDN?" not in log.read_text(encoding="utf-8")
+
+
 def test_blocked_query_is_refused(scope):
     with pytest.raises(BlockedCommandError):
         scope.query("*TST?")

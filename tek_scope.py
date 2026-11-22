@@ -292,6 +292,8 @@ class TekScope:
 
     def query(self, cmd: str, allow_dangerous: bool = False) -> str:
         self._check(cmd, allow_dangerous)
+        if any(not h.endswith("?") for h in segment_headers(cmd)):
+            self._log(f"WRITE\t{cmd}")  # a query line that also sets something
         return self.resource.query(cmd).strip()
 
     def _query_float(self, cmd: str) -> float:
