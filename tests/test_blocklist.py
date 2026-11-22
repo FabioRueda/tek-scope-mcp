@@ -28,6 +28,13 @@ from tek_scope import blocked_reason, segment_headers, strip_blocked_segments
         "FILES:DELEte \"A.TXT\"",
         "DIAg:LOOP:OPTion ONCE",
         "dia:exec",
+        # *SAV overwrites a stored setup; *RCL replaces every setting
+        "*SAV 1",
+        "*sav 1",
+        "*RCL 1",
+        "*RCL?",
+        "*SAV?",
+        "*CLS;*SAV 2",
         # hidden inside a concatenated line
         "HARDCopy:FORMat BMP;:SAVe:SETUp 1",
         "HARDCopy:FORMat BMP;*RST",

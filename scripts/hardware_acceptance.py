@@ -36,7 +36,7 @@ def plot(t, v, pre, path):
 
 
 def main() -> int:
-    stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    stamp = datetime.datetime.now().astimezone().strftime("%Y%m%d-%H%M%S")
     backup_dir = ROOT / "local" / "backup"
     logs_dir = ROOT / "local" / "logs"
     docs = ROOT / "docs"

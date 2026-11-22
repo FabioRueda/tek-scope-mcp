@@ -102,7 +102,7 @@ def _matches(node: str, short: str, long: str) -> bool:
 def _header_blocked(header: str) -> str | None:
     is_query = header.endswith("?")
     bare = header.rstrip("?")
-    if bare in ("*CAL", "*TST", "*RST"):
+    if bare in ("*CAL", "*TST", "*RST", "*SAV", "*RCL"):
         return f"{bare} is blocked"
     nodes = bare.split(":")
     first = nodes[0]
@@ -273,7 +273,7 @@ class TekScope:
 
     def _log(self, line: str) -> None:
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
-        stamp = _dt.datetime.now().isoformat(timespec="seconds")
+        stamp = _dt.datetime.now().astimezone().isoformat(timespec="seconds")
         with open(self.log_path, "a", encoding="utf-8") as fh:
             fh.write(f"{stamp}\t{line}\n")
 

@@ -10,7 +10,7 @@ This is an independent project. It is not affiliated with, sponsored by or endor
 |---|---|
 | Repository layout, safety rules, build prompts | done |
 | USB connection (VISA backend, `*IDN?`) | done, tested on hardware: NI-VISA 2026 Q4 on Windows 11, `*IDN?` answered 3 times in a row, `SET?` read. See [docs/connection.md](docs/connection.md). |
-| Control library `tek_scope.py` | done, acceptance passed on hardware with the probe compensation signal on CH1 (1.000 kHz, 5.20 V peak to peak, 2500-point waveform, screen capture, no errors, `SET?` restored). Unit tests with a fake instrument in [tests/](tests/). |
+| Control library `tek_scope.py` | done, acceptance passed on hardware with the probe compensation signal on CH1 (1.000 kHz, 5.20 V peak to peak, 2500-point waveform, screen capture, no errors, `SET?` restored). Unit tests with a fake instrument in [tests/](tests/). `*SAV` and `*RCL` were added to the blocklist later; that change has unit tests only and was not sent to the hardware. |
 | Command map (which queries the instrument answers) | not started |
 | MCP server `server.py` | not started |
 
@@ -60,6 +60,7 @@ The library and the server refuse these commands by default:
 
 - `*CAL?`, `*TST?` and every `CALibrate:` command except `CALibrate:STATUS?`. Factory calibration is for qualified service only and can leave the instrument out of calibration.
 - `FACtory`, `*RST`, `SAVe:`, `RECAll:` and every `FILESystem:` command that is not a query. `FILESystem:FORMat` erases the USB flash drive in the front port.
+- `*SAV` and `*RCL`, with or without `?`. `*SAV` overwrites a setup stored in internal memory and `*RCL` replaces every setting at once, the same risks as `SAVe:` and `RECAll:`.
 - `DIAg:` commands that are not queries.
 
 Commands that change settings need an explicit confirmation in the MCP server. Every write is logged locally.

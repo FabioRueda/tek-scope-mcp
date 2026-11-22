@@ -15,6 +15,7 @@ Read [README.md](README.md) first. The build steps are in [prompts/](prompts/), 
   - every `CALibrate:` command except `CALibrate:STATUS?`
   - `FACtory`, `*RST`
   - `SAVe:`, `RECAll:`
+  - `*SAV`, `*RCL` (with or without `?`)
   - every `FILESystem:` command that is not a query
   - `DIAg:` commands that are not queries
 - **Save and restore.** Before any test that changes instrument settings, save `SET?` to `local/backup/`. Restore it at the end and compare.
