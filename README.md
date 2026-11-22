@@ -10,11 +10,36 @@ This is an independent project. It is not affiliated with, sponsored by or endor
 |---|---|
 | Repository layout, safety rules, build prompts | done |
 | USB connection (VISA backend, `*IDN?`) | done, tested on hardware: NI-VISA 2026 Q4 on Windows 11, `*IDN?` answered 3 times in a row, `SET?` read. See [docs/connection.md](docs/connection.md). |
-| Control library `tek_scope.py` | not started |
+| Control library `tek_scope.py` | done, acceptance passed on hardware with the probe compensation signal on CH1 (1.000 kHz, 5.20 V peak to peak, 2500-point waveform, screen capture, no errors, `SET?` restored). Unit tests with a fake instrument in [tests/](tests/). |
 | Command map (which queries the instrument answers) | not started |
 | MCP server `server.py` | not started |
 
-Tested on hardware so far: opening the USB resource and the commands `*CLS`, `*IDN?`, `*ESR?`, `HEADer`, `VERBose` and `SET?`. Not tested: the pyvisa-py + Zadig path, other Windows versions, other instrument models. This table is updated at the end of each build step, with what was tested and what was not.
+Tested on hardware so far: opening the USB resource; `*CLS`, `*IDN?`, `*ESR?`, `*OPC?`, `ALLEv?`, `BUSY?`, `HEADer`, `VERBose`, `SET?` and sending it back; `CH1:PRObe`; `TRIGger:MAIn:LEVel` and `TRIGger:MAIn SETLevel`; `MEASUrement:IMMed:SOUrce`, `:TYPe` (`FREQuency`, `PK2pk`), `:VALue?`; `DATa:SOUrce`, `:ENCdg RIBinary`, `:WIDth 1`, `:STARt`, `:STOP`, `WFMPre?`, `CURVe?`; `HARDCopy:FORMat BMP`, `HARDCopy:PORT USB`, `HARDCopy STARt`.
+
+Implemented but not yet run on hardware: the other channel setters (`SCAle`, `POSition`, `COUPling`, `BANdwidth`, `INVert`), horizontal scale and position, the other edge-trigger setters, `TRIGger:STATE?`, `run()`, `stop()`, `single()`, `autoset()` and `ACQuire:MODe`/`NUMAVg`. Not tested: the pyvisa-py + Zadig path, other Windows versions, other instrument models. This table is updated at the end of each build step, with what was tested and what was not.
+
+Known limits found on hardware:
+
+- A trigger level set from the front panel or by autoset can be finer than what `TRIGger:MAIn:LEVel` accepts. By command, the level moves in steps (0.08 V at 2 V/div), so restoring such a `SET?` gives the nearest step.
+- `SET?` contains `:SAVE:IMAGE:FILEFORMAT`, which is in the blocklist. `restore()` leaves it out. On this model `HARDCopy:FORMat` changes the saved-image format too, so the value still comes back.
+- Sending the whole `SET?` text in one write can take longer than 10 s. `restore()` sends it in groups, with a 30 s timeout.
+
+## Using the library
+
+```python
+from tek_scope import TekScope
+
+with TekScope() as scope:          # finds the first Tektronix USB instrument, or TEK_SCOPE_RESOURCE
+    print(scope.idn())
+    print(scope.measure("FREQuency", 1))
+    t, v, preamble = scope.waveform(1)
+    scope.save_csv("ch1.csv")
+    scope.screenshot("screen.png")
+```
+
+Only one process can hold the instrument at a time (a lock file in `local/`). Every write is logged to `local/logs/escritas.log`. Blocked commands raise `BlockedCommandError` unless `allow_dangerous=True` is passed. `scripts/hardware_acceptance.py` runs the build-step 2 acceptance and restores the settings afterwards.
+
+Example output from the acceptance run: [docs/ch1.png](docs/ch1.png), [docs/ch1.csv](docs/ch1.csv), [docs/screen.png](docs/screen.png).
 
 Test instrument: TDS 1012C-EDU, firmware v25.11, Windows notebook. Other models covered by the same programmer manual (TDS2000C, TDS1000B/2000B, TBS1000) are untested.
 
