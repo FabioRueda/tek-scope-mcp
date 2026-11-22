@@ -1,0 +1,8 @@
+pyvisa
+pyvisa-py
+pyusb
+numpy
+pillow
+matplotlib
+ruff
+pytest

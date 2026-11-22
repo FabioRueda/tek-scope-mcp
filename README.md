@@ -9,12 +9,12 @@ This is an independent project. It is not affiliated with, sponsored by or endor
 | | Status |
 |---|---|
 | Repository layout, safety rules, build prompts | done |
-| USB connection (VISA backend, `*IDN?`) | not started |
+| USB connection (VISA backend, `*IDN?`) | done, tested on hardware: NI-VISA 2026 Q4 on Windows 11, `*IDN?` answered 3 times in a row, `SET?` read. See [docs/connection.md](docs/connection.md). |
 | Control library `tek_scope.py` | not started |
 | Command map (which queries the instrument answers) | not started |
 | MCP server `server.py` | not started |
 
-**Nothing in this repository has run on hardware yet.** This table is updated at the end of each build step, with what was tested and what was not.
+Tested on hardware so far: opening the USB resource and the commands `*CLS`, `*IDN?`, `*ESR?`, `HEADer`, `VERBose` and `SET?`. Not tested: the pyvisa-py + Zadig path, other Windows versions, other instrument models. This table is updated at the end of each build step, with what was tested and what was not.
 
 Test instrument: TDS 1012C-EDU, firmware v25.11, Windows notebook. Other models covered by the same programmer manual (TDS2000C, TDS1000B/2000B, TBS1000) are untested.
 
