@@ -1,0 +1,5588 @@
+{
+ "meta": {
+  "firmware": "v25.11",
+  "date": "2026-11-22",
+  "header_mode": "ON",
+  "verbose_mode": "ON",
+  "notes": [
+   "**Why the WFMPre queries above failed.** During the run `DATa:SOUrce` was `CH2` and CH2 was not displayed (`SELect:CH2 0`). The manual says the `WFMPre:<field>?` queries describe the `DATa:SOUrce` waveform and give event 2244 when it is not displayed. The same fields read through `WFMPre:CH1:<field>?` were all accepted. Changing `DATa:SOUrce` was out of scope (no writes except `HEADer` and `VERBose`). The six Table 2-36 headers gave 100 and 420, as the manual says.",
+   "**Timeouts.** The timeout was set to 3 s; with NI-VISA the wait measured about 5 s."
+  ]
+ },
+ "counts": {
+  "manual_headers": 345,
+  "classified": 345,
+  "by_status": {
+   "accepted": 177,
+   "no_query_form": 39,
+   "excluded": 5,
+   "no_response": 122,
+   "accepted_slow": 2
+  },
+  "table_a": 172,
+  "table_b": 7,
+  "table_c": 1,
+  "documented_here_not_accepted": 17
+ },
+ "commands": [
+  {
+   "header": "ACQuire?",
+   "page": "2-39",
+   "group": "Acquisition",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ACQuire?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ACQUIRE:MODE SAMPLE;NUMAVG 16;STATE 1;STOPAFTER RUNSTOP",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.171
+  },
+  {
+   "header": "ACQuire:MODe",
+   "page": "2-40",
+   "group": "Acquisition",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ACQuire:MODe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ACQUIRE:MODE SAMPLE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "ACQuire:NUMACq?",
+   "page": "2-41",
+   "group": "Acquisition",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ACQuire:NUMACq?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ACQUIRE:NUMACQ 229100",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "ACQuire:NUMAVg",
+   "page": "2-41",
+   "group": "Acquisition",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ACQuire:NUMAVg?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ACQUIRE:NUMAVG 16",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "ACQuire:STATE",
+   "page": "2-42",
+   "group": "Acquisition",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ACQuire:STATE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ACQUIRE:STATE 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "ACQuire:STOPAfter",
+   "page": "2-43",
+   "group": "Acquisition",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ACQuire:STOPAfter?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ACQUIRE:STOPAFTER RUNSTOP",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "ALLEv?",
+   "page": "2-43",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ALLEv?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ALLEV 0,\"No events to report - queue empty\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "AUTORange",
+   "page": "2-44",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "AUTORange:SETTings",
+   "page": "2-45",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "AUTORange:SETTings?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":AUTORANGE:SETTINGS BOTH",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "AUTORange:STATE",
+   "page": "2-44",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "AUTORange:STATE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":AUTORANGE:STATE 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "AUTOSet",
+   "page": "2-45",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "AUTOSet:ENABLE",
+   "page": "2-46",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form shown in syntax or description",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "AUTOSet:SIGNAL?",
+   "page": "2-46",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "AUTOSet:SIGNAL?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":AUTOSET:SIGNAL NONE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "AUTOSet:VIEW",
+   "page": "2-47",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "BUSY?",
+   "page": "2-48",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "BUSY?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":BUSY 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "*CAL?",
+   "page": "2-48",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "excluded",
+   "reason_not_sent": "blocklist (CLAUDE.md): *CAL is blocked",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "CALibrate:ABOrt",
+   "page": "2-49",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "CALibrate:CONTINUE",
+   "page": "2-49",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "CALibrate:FACtory",
+   "page": "2-50",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "CALibrate:INTERNAL",
+   "page": "2-50",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "CALibrate:STATUS?",
+   "page": "2-51",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CALibrate:STATUS?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CALIBRATE:STATUS PASS",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "CH<x>?",
+   "page": "2-51",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:PROBE 1.0E1;CURRENTPROBE 1.0E1;SCALE 2.0E0;POSITION 0.0E0;COUPLING DC;BANDWIDTH OFF;INVERT OFF;YUNIT \"V\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.391
+  },
+  {
+   "header": "CH<x>:BANdwidth",
+   "page": "2-52",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:BANdwidth?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:BANDWIDTH OFF",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.079
+  },
+  {
+   "header": "CH<x>:COUPling",
+   "page": "2-53",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:COUPling?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:COUPLING DC",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "CH<x>:CURRENTPRObe",
+   "page": "2-53",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:CURRENTPRObe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:CURRENTPROBE 1.0E1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "CH<x>:INVert",
+   "page": "2-54",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:INVert?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:INVERT OFF",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "CH<x>:POSition",
+   "page": "2-55",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:POSition?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "CH<x>:PRObe",
+   "page": "2-56",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:PRObe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:PROBE 1.0E1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "CH<x>:SCAle",
+   "page": "2-56",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:SCAle?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:SCALE 2.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "CH<x>:VOLts",
+   "page": "2-57",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:VOLts?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:VOLTS 2.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "CH<x>:YUNit",
+   "page": "2-57",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CH1:YUNit?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CH1:YUNIT \"V\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "*CLS",
+   "page": "2-58",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "COUNTERFreq?",
+   "page": "2-58",
+   "group": "Counter",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "COUNTERFreq?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "COUNTERFreq:CH1Level",
+   "page": "2-59",
+   "group": "Counter",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "COUNTERFreq:CH1Level?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "COUNTERFreq:CH1State",
+   "page": "2-59",
+   "group": "Counter",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "COUNTERFreq:CH1State?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "COUNTERFreq:CH1Value?",
+   "page": "2-59",
+   "group": "Counter",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "COUNTERFreq:CH1Value?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "COUNTERFreq:CH2Level",
+   "page": "2-59",
+   "group": "Counter",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "COUNTERFreq:CH2Level?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "COUNTERFreq:CH2State",
+   "page": "2-60",
+   "group": "Counter",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "COUNTERFreq:CH2State?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "COUNTERFreq:CH2Value?",
+   "page": "2-60",
+   "group": "Counter",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "COUNTERFreq:CH2Value?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "CURSor?",
+   "page": "2-60",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:FUNCTION OFF;SELECT:SOURCE CH1;:CURSOR:VBARS:UNITS SECONDS;POSITION1 -7.8E-4;POSITION2 5.0E-4;:CURSOR:HBARS:UNITS VOLTS;POSITION1 6.4E0;POSITION2 -6.4E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.516
+  },
+  {
+   "header": "CURSor:FUNCtion",
+   "page": "2-61",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:FUNCtion?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:FUNCTION OFF",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "CURSor:HBArs?",
+   "page": "2-61",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:HBArs?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:HBARS:UNITS VOLTS;POSITION1 6.4E0;POSITION2 -6.4E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.218
+  },
+  {
+   "header": "CURSor:HBArs:DELTa?",
+   "page": "2-62",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:HBArs:DELTa?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:HBARS:DELTA 1.28E1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "CURSor:HBArs:POSITION<x>",
+   "page": "2-62",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:HBArs:POSITION1?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:HBARS:POSITION1 6.4E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "CURSor:HBArs:UNIts?",
+   "page": "2-63",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:HBArs:UNIts?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:HBARS:UNITS VOLTS",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "CURSor:SELect:SOUrce",
+   "page": "2-64",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:SELect:SOUrce?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:SELECT:SOURCE CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "CURSor:VBArs?",
+   "page": "2-64",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:VBArs?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:VBARS:UNITS SECONDS;POSITION1 -7.8E-4;POSITION2 5.0E-4",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.234
+  },
+  {
+   "header": "CURSor:VBArs:DELTa?",
+   "page": "2-64",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:VBArs:DELTa?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:VBARS:DELTA 1.28E-3",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.172
+  },
+  {
+   "header": "CURSor:VBArs:HDELTa?",
+   "page": "2-65",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:VBArs:HDELTa?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:VBARS:HDELTA 1.28E-3",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.11
+  },
+  {
+   "header": "CURSor:VBArs:HPOS<x>?",
+   "page": "2-65",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:VBArs:HPOS1?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:VBARS:HPOS1 9.9E37",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "CURSor:VBArs:POSITION<x>",
+   "page": "2-66",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:VBArs:POSITION1?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:VBARS:POSITION1 -7.8E-4",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.11
+  },
+  {
+   "header": "CURSor:VBArs:SLOPE?",
+   "page": "2-67",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "CURSor:VBArs:SLOPE?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    420
+   ],
+   "esr": 4,
+   "seconds": 5.218
+  },
+  {
+   "header": "CURSor:VBArs:UNIts",
+   "page": "2-67",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:VBArs:UNIts?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:VBARS:UNITS SECONDS",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "CURSor:VBArs:VDELTa?",
+   "page": "2-68",
+   "group": "Cursor",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "CURSor:VBArs:VDELTa?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":CURSOR:VBARS:VDELTA 9.9E37",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "CURVe",
+   "page": "2-68",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "excluded",
+   "reason_not_sent": "CURVe? is excluded by the build prompt (binary waveform transfer)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "DATa",
+   "page": "2-69",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATa?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATA:ENCDG RIBINARY;DESTINATION REFA;SOURCE CH2;START 1;STOP 2500;WIDTH 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.203
+  },
+  {
+   "header": "DATa:DESTination",
+   "page": "2-70",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATa:DESTination?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATA:DESTINATION REFA",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "DATa:ENCdg",
+   "page": "2-70",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATa:ENCdg?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATA:ENCDG RIBINARY",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "DATa:SOUrce",
+   "page": "2-72",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATa:SOUrce?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATA:SOURCE CH2",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "DATa:STARt",
+   "page": "2-72",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATa:STARt?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATA:START 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "DATa:STOP",
+   "page": "2-73",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATa:STOP?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATA:STOP 2500",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "DATa:TARget",
+   "page": "2-73",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATa:TARget?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATA:TARGET REFA",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "DATa:WIDth",
+   "page": "2-74",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATa:WIDth?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATA:WIDTH 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "DATALOGging?",
+   "page": "2-74",
+   "group": "Data Logging",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "DATALOGging?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "DATALOGging:DURAtion",
+   "page": "2-74",
+   "group": "Data Logging",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "DATALOGging:DURAtion?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.218
+  },
+  {
+   "header": "DATALOGging:SOURCE",
+   "page": "2-75",
+   "group": "Data Logging",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form shown in syntax or description",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "DATALOGging:STATE",
+   "page": "2-76",
+   "group": "Data Logging",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form shown in syntax or description",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "DATE",
+   "page": "2-76",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DATE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DATE \"2026-11-22\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "*DDT",
+   "page": "2-77",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*DDT?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "#10",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.046
+  },
+  {
+   "header": "DESE",
+   "page": "2-77",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DESE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DESE 255",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "DIAg:RESUlt:FLAg?",
+   "page": "2-78",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DIAg:RESUlt:FLAg?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DIAG:RESULT:FLAG PASS",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "DIAg:RESUlt:LOG?",
+   "page": "2-79",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DIAg:RESUlt:LOG?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DIAG:RESULT:LOG \"pass--CPU,pass--ACQ1,pass--EXTENSION,\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "DISplay?",
+   "page": "2-79",
+   "group": "Display",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DISplay?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DISPLAY:FORMAT YT;STYLE VECTORS;PERSISTENCE 0;CONTRAST 50;INVERT OFF",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.203
+  },
+  {
+   "header": "DISplay:BACKLight",
+   "page": "2-79",
+   "group": "Display",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "DISplay:BACKLight?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.204
+  },
+  {
+   "header": "DISplay:BRIGHTness",
+   "page": "2-80",
+   "group": "Display",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "DISplay:BRIGHTness?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "DISplay:CONTRast",
+   "page": "2-80",
+   "group": "Display",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DISplay:CONTRast?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DISPLAY:CONTRAST 50",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "DISplay:FORMat",
+   "page": "2-81",
+   "group": "Display",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DISplay:FORMat?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DISPLAY:FORMAT YT",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "DISplay:INVert",
+   "page": "2-81",
+   "group": "Display",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DISplay:INVert?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DISPLAY:INVERT OFF",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "DISplay:PERSistence",
+   "page": "2-82",
+   "group": "Display",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DISplay:PERSistence?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DISPLAY:PERSISTENCE 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "DISplay:STYle",
+   "page": "2-82",
+   "group": "Display",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "DISplay:STYle?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":DISPLAY:STYLE VECTORS",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "ERRLOG:FIRST?",
+   "page": "2-83",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ERRLOG:FIRST?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ERRLOG:FIRST \"\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "ERRLOG:NEXT?",
+   "page": "2-83",
+   "group": "Calibration and Diagnostic",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ERRLOG:NEXT?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":ERRLOG:NEXT \"\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "*ESE",
+   "page": "2-84",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*ESE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "*ESR?",
+   "page": "2-84",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*ESR?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "EVENT?",
+   "page": "2-85",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "EVENT?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":EVENT 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "EVMsg?",
+   "page": "2-85",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "EVMsg?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":EVMSG 0,\"No events to report - queue empty\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "EVQty?",
+   "page": "2-86",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "EVQty?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":EVQTY 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "FACtory",
+   "page": "2-86",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form shown in syntax or description",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "FFT?",
+   "page": "2-94",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "FFT?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "FFT:HORizontal:POSition",
+   "page": "2-94",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "FFT:HORizontal:POSition?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "FFT:HORizontal:SCAle",
+   "page": "2-94",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "FFT:HORizontal:SCAle?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "FFT:SOURce",
+   "page": "2-95",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "FFT:SOURce?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "FFT:SRCWFM",
+   "page": "2-95",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "FFT:SRCWFM?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "FFT:VERtical:POSition",
+   "page": "2-95",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "FFT:VERtical:POSition?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "FFT:VERtical:SCAle",
+   "page": "2-95",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "FFT:VERtical:SCAle?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "FFT:WIN",
+   "page": "2-96",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "FFT:WIN?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "FILESystem?",
+   "page": "2-88",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "FILESystem?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":FILESYSTEM:CWD \"\";FREESPACE 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.125
+  },
+  {
+   "header": "FILESystem:CWD",
+   "page": "2-88",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "FILESystem:CWD?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":FILESYSTEM:CWD \"\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "FILESystem:DELEte",
+   "page": "2-89",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "FILESystem:DIR?",
+   "page": "2-90",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "FILESystem:DIR?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":FILESYSTEM:DIR",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "FILESystem:FORMat",
+   "page": "2-90",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "FILESystem:FREESpace?",
+   "page": "2-91",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "FILESystem:FREESpace?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":FILESYSTEM:FREESPACE 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "FILESystem:MKDir",
+   "page": "2-91",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "FILESystem:REName",
+   "page": "2-92",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "FILESystem:RMDir",
+   "page": "2-93",
+   "group": "File system",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "HARDCopy",
+   "page": "2-96",
+   "group": "Hard copy",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "excluded",
+   "reason_not_sent": "HARDCopy is excluded by the build prompt (HARDCopy? included)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "HARDCopy:BUTTON",
+   "page": "2-97",
+   "group": "Hard copy",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HARDCopy:BUTTON?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HARDCOPY:BUTTON SAVESIMAGE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "HARDCopy:FORMat",
+   "page": "2-98",
+   "group": "Hard copy",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HARDCopy:FORMat?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HARDCOPY:FORMAT JPEG",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "HARDCopy:INKSaver",
+   "page": "2-100",
+   "group": "Hard copy",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HARDCopy:INKSaver?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HARDCOPY:INKSAVER OFF",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "HARDCopy:LAYout",
+   "page": "2-100",
+   "group": "Hard copy",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HARDCopy:LAYout?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HARDCOPY:LAYOUT PORTRAIT",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "HARDCopy:PORT",
+   "page": "2-101",
+   "group": "Hard copy",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HARDCopy:PORT?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HARDCOPY:PORT USB",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "HARmonics?",
+   "page": "2-102",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "HARmonics:ENABle",
+   "page": "2-102",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:ENABle?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "HARmonics:FREquency?",
+   "page": "2-103",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:FREquency?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "HARmonics:HRMS?",
+   "page": "2-103",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:HRMS?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.187
+  },
+  {
+   "header": "HARmonics:PERCent?",
+   "page": "2-104",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:PERCent?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.188
+  },
+  {
+   "header": "HARmonics:PHAse?",
+   "page": "2-104",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:PHAse?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.234
+  },
+  {
+   "header": "HARmonics:RMS?",
+   "page": "2-104",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:RMS?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "HARmonics:SAVe",
+   "page": "2-104",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "HARmonics:SELect",
+   "page": "2-105",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:SELect?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "HARmonics:SETUp",
+   "page": "2-106",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:SETUp?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.204
+  },
+  {
+   "header": "HARmonics:SHOW",
+   "page": "2-106",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:SHOW?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "HARmonics:SOUrce",
+   "page": "2-107",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:SOUrce?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "HARmonics:THDF?",
+   "page": "2-107",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:THDF?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "HARmonics:THDR?",
+   "page": "2-108",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "HARmonics:THDR?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "HDR",
+   "page": "2-108",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HDR?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HDR 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "HEADer",
+   "page": "2-108",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HEADer?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HEADER 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "HORizontal?",
+   "page": "2-109",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:VIEW MAIN;RECORDLENGTH 2500;MAIN:SCALE 5.0E-4;POSITION 0.0E0;:HORIZONTAL:DELAY:SCALE 5.0E-9;POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.313
+  },
+  {
+   "header": "HORizontal:DELay?",
+   "page": "2-109",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:DELay?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:DELAY:SCALE 5.0E-9;POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.141
+  },
+  {
+   "header": "HORizontal:DELay:POSition",
+   "page": "2-110",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:DELay:POSition?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:DELAY:POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "HORizontal:DELay:SCAle",
+   "page": "2-110",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:DELay:SCAle?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:DELAY:SCALE 5.0E-9",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "HORizontal:DELay:SECdiv",
+   "page": "2-111",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:DELay:SECdiv?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:DELAY:SECDIV 5.0E-9",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "HORizontal:MAIn?",
+   "page": "2-111",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:MAIn?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:MAIN:SCALE 5.0E-4;POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.156
+  },
+  {
+   "header": "HORizontal:MAIn:POSition",
+   "page": "2-112",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:MAIn:POSition?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:MAIN:POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.125
+  },
+  {
+   "header": "HORizontal:MAIn:SCAle",
+   "page": "2-112",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:MAIn:SCAle?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:MAIN:SCALE 5.0E-4",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "HORizontal:MAIn:SECdiv",
+   "page": "2-113",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:MAIn:SECdiv?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:MAIN:SECDIV 5.0E-4",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "HORizontal:POSition",
+   "page": "2-113",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:POSition?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "HORizontal:RECOrdlength?",
+   "page": "2-113",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:RECOrdlength?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:RECORDLENGTH 2500",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "HORizontal:SCAle",
+   "page": "2-114",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:SCAle?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:SCALE 5.0E-4",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "HORizontal:SECdiv",
+   "page": "2-114",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:SECdiv?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:SECDIV 5.0E-4",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "HORizontal:VIEW",
+   "page": "2-114",
+   "group": "Horizontal",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "HORizontal:VIEW?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HORIZONTAL:VIEW MAIN",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "ID?",
+   "page": "2-115",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "ID?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "ID TEK/TDS 1012C-EDU,CF:91.1CT FV:v25.11",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "*IDN?",
+   "page": "2-116",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*IDN?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "TEKTRONIX,TDS 1012C-EDU,<SERIAL>,CF:91.1CT FV:v25.11",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "LANGuage",
+   "page": "2-117",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "LANGuage?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":LANGUAGE PORTUGUESE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "LIMit?",
+   "page": "2-118",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "LIMit:COMpare",
+   "page": "2-118",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:COMpare?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.203
+  },
+  {
+   "header": "LIMit:RESUlt:FAIL?",
+   "page": "2-119",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:RESUlt:FAIL?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.188
+  },
+  {
+   "header": "LIMit:RESUlt:PASS?",
+   "page": "2-119",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:RESUlt:PASS?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.219
+  },
+  {
+   "header": "LIMit:RESUlt:TOTAL?",
+   "page": "2-120",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:RESUlt:TOTAL?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "LIMit:SAVEIMAge",
+   "page": "2-120",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:SAVEIMAge?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.016
+  },
+  {
+   "header": "LIMit:SAVEWFM",
+   "page": "2-121",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:SAVEWFM?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "LIMit:SOUrce",
+   "page": "2-121",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:SOUrce?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "LIMit:STATE",
+   "page": "2-122",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:STATE?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "LIMit:STOPAfter:MODe",
+   "page": "2-122",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:STOPAfter:MODe?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "LIMit:STOPAfter:TIMe",
+   "page": "2-123",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:STOPAfter:TIMe?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 3.0
+  },
+  {
+   "header": "LIMit:STOPAfter:VIOLation",
+   "page": "2-124",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:STOPAfter:VIOLation?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "LIMit:STOPAfter:WAVEform",
+   "page": "2-124",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:STOPAfter:WAVEform?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "LIMit:TEMPLate",
+   "page": "2-125",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "LIMit:TEMPLate:DESTination",
+   "page": "2-125",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:TEMPLate:DESTination?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "LIMit:TEMPlate:DUALSOUrce",
+   "page": "2-126",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:TEMPlate:DUALSOUrce?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "LIMit:TEMPLate:SAVEFIRSource",
+   "page": "2-126",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "LIMit:TEMPLate:SAVESECSource",
+   "page": "2-127",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "LIMit:TEMPLate:SAVESOUrce",
+   "page": "2-127",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "LIMit:TEMPLate:SOUrce",
+   "page": "2-127",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:TEMPLate:SOUrce?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "LIMit:TEMPLate:TOLerance:HORizontal",
+   "page": "2-128",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:TEMPLate:TOLerance:HORizontal?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "LIMit:TEMPLate:TOLerance:VERTical",
+   "page": "2-129",
+   "group": "Limit Test",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "LIMit:TEMPLate:TOLerance:VERTical?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "LOCk",
+   "page": "2-129",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "LOCk?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":LOCK NONE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "*LRN?",
+   "page": "2-130",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*LRN?",
+   "status": "accepted_slow",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HEADER 1;:VERBOSE 1;:DATA:ENCDG RIBINARY;DESTINATION REFA;SOURCE CH2;START 1;STOP 2500;WIDTH 1;:LOCK NONE;:DISPLAY:FORMAT YT;STYLE VECTORS;PERSISTENCE 0;CONTRAST 50;INVERT OFF;:ACQUIRE:MODE SAMPLE;NUMAVG 16;STATE 1;STOPAFTER RUNSTOP;:CH1:PROBE 1.0E1;CURRENTPROBE 1.0E1;SCALE 2.0E0;POSITION 0.0E0;COUPLING DC;BANDWIDTH OFF;INVERT OFF;YUNIT \"V\";:CH2:PROBE 1.0E1;CURRENTPROBE 1.0E1;SCALE 5.0E-1;POSITION 0.0E0;COUPLING DC;BANDWIDTH OFF;INVERT OFF;YUNIT \"V\";:HORIZONTAL:VIEW MAIN;MAIN:SCALE 5.0E-4;POSITION 0.0E0;:HORIZONTAL:DELAY:SCALE 5.0E-9;POSITION 0.0E0;:TRIGGER:MAIN:MODE AUTO;TYPE EDGE;HOLDOFF:VALUE 5.0E-7;:TRIGGER:MAIN:EDGE:SOURCE CH1;COUPLING DC;SLOPE RISE;:TRIGGER:MAIN:VIDEO:SOURCE CH1;SYNC FIELD;POLARITY NORMAL;LINE 1;STANDARD NTSC;:TRIGGER:MAIN:PULSE:SOURCE CH1;WIDTH:POLARITY NEGATIVE;WHEN OUTSIDE;WIDTH 7.5002E-3;:TRIGGER:MAIN:LEVEL 2.56E0;:SELECT:CH1 1;CH2 0;MATH 0;REFA 0;REFB 0;:CURSOR:FUNCTION OFF;SELECT:SOURCE CH1;:CURSOR:VBARS:UNITS SECONDS;POSITION1 -7.8E-4;POSITION2 5.0E-4;:CURSOR:HBARS:POSITION1 6.4E0;POSITION2 -6.4E0;:MEASUREMENT:MEAS1:TYPE FREQUENCY;SOURCE CH1;:MEASUREMENT:MEAS2:TYPE PERIOD;SOURCE CH1;:MEASUREMENT:MEAS3:TYPE MAXIMUM;SOURCE CH1;:MEASUREMENT:MEAS4:TYPE FREQUENCY;SOURCE CH1;:MEASUREMENT:MEAS5:TYPE MEAN;SOURCE CH2;:MEASUREMENT:IMMED:TYPE PERIOD;SOURCE1 CH1;:MEASUREMENT:METHOD AUTO;:MATH:DEFINE \"CH1 - CH2\";VERTICAL:POSITION 0.0E0;SCALE 2.0E0;:MATH:FFT:HORIZONTAL:POSITION 5.0E1;SCALE 1.0E0;:MATH:FFT:VERTICAL:POSITION 0.0E0;SCALE 1.0E0;:HARDCOPY:BUTTON SAVESIMAGE;FORMAT JPEG;PORT USB;LAYOUT PORTRAIT;INKSAVER OFF;:PICTBRIDGE:PAPERSIZE DEFLT;IMAGESIZE DEFLT;PAPERTYPE DEFLT;PRINTQUAL DEFLT;DATEPRINT DEFLT;IDPRINT DEFLT;:LANGUAGE PORTUGUESE;:AUTORANGE:SETTINGS BOTH;:SAVE:IMAGE:FILEFORMAT JPEG",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 4.89
+  },
+  {
+   "header": "MATH?",
+   "page": "2-130",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:DEFINE \"CH1 - CH2\";VERTICAL:POSITION 0.0E0;SCALE 2.0E0;:MATH:FFT:HORIZONTAL:POSITION 5.0E1;SCALE 1.0E0;:MATH:FFT:VERTICAL:POSITION 0.0E0;SCALE 1.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.469
+  },
+  {
+   "header": "MATH:DEFINE",
+   "page": "2-130",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:DEFINE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:DEFINE \"CH1 - CH2\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "MATH:FFT?",
+   "page": "2-132",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:FFT?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:FFT:HORIZONTAL:POSITION 5.0E1;SCALE 1.0E0;:MATH:FFT:VERTICAL:POSITION 0.0E0;SCALE 1.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.328
+  },
+  {
+   "header": "MATH:FFT:HORizontal:POSition",
+   "page": "2-132",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:FFT:HORizontal:POSition?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:FFT:HORIZONTAL:POSITION 5.0E1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.125
+  },
+  {
+   "header": "MATH:FFT:HORizontal:SCAle",
+   "page": "2-133",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:FFT:HORizontal:SCAle?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:FFT:HORIZONTAL:SCALE 1.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.125
+  },
+  {
+   "header": "MATH:FFT:VERtical:POSition",
+   "page": "2-134",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:FFT:VERtical:POSition?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:FFT:VERTICAL:POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "MATH:FFT:VERtical:SCAle",
+   "page": "2-134",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:FFT:VERtical:SCAle?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:FFT:VERTICAL:SCALE 1.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.125
+  },
+  {
+   "header": "MATH:VERtical?",
+   "page": "2-135",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:VERtical?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:VERTICAL:POSITION 0.0E0;SCALE 2.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.156
+  },
+  {
+   "header": "MATH:VERtical:POSition",
+   "page": "2-135",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:VERtical:POSition?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:VERTICAL:POSITION 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "MATH:VERtical:SCAle",
+   "page": "2-136",
+   "group": "Math",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MATH:VERtical:SCAle?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MATH:VERTICAL:SCALE 2.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.11
+  },
+  {
+   "header": "MEASUrement?",
+   "page": "2-136",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:MEAS1:TYPE FREQUENCY;UNITS \"Hz\";SOURCE CH1;:MEASUREMENT:MEAS2:TYPE PERIOD;UNITS \"s\";SOURCE CH1;:MEASUREMENT:MEAS3:TYPE MAXIMUM;UNITS \"V\";SOURCE CH1;:MEASUREMENT:MEAS4:TYPE FREQUENCY;UNITS \"Hz\";SOURCE CH1;:MEASUREMENT:MEAS5:TYPE MEAN;UNITS \"V\";SOURCE CH2;:MEASUREMENT:IMMED:TYPE PERIOD;UNITS \"s\";SOURCE1 CH1;:MEASUREMENT:METHOD AUTO",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.859
+  },
+  {
+   "header": "MEASUrement:CLEARSNAPSHOT",
+   "page": "2-137",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "MEASUrement:GATing",
+   "page": "2-137",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "MEASUrement:GATing?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "MEASUrement:IMMed?",
+   "page": "2-137",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:IMMed?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:IMMED:TYPE PERIOD;UNITS \"s\";SOURCE1 CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.172
+  },
+  {
+   "header": "MEASUrement:IMMed:SOUrce[1]",
+   "page": "2-138",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:IMMed:SOUrce?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:IMMED:SOURCE CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "MEASUrement:IMMed:SOURCE2",
+   "page": "2-138",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "MEASUrement:IMMed:SOURCE2?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:IMMED:SOURCE2 CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "MEASUrement:IMMed:TYPe",
+   "page": "2-139",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:IMMed:TYPe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:IMMED:TYPE PERIOD",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "MEASUrement:IMMed:UNIts?",
+   "page": "2-143",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:IMMed:UNIts?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:IMMED:UNITS \"s\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "MEASUrement:IMMed:VALue?",
+   "page": "2-143",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:IMMed:VALue?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:IMMED:VALUE 1.0E-3",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.578
+  },
+  {
+   "header": "MEASUrement:MEAS<x>?",
+   "page": "2-144",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:MEAS1?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:MEAS1:TYPE FREQUENCY;UNITS \"Hz\";SOURCE CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.172
+  },
+  {
+   "header": "MEASUrement:MEAS<x>:SOUrce",
+   "page": "2-145",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:MEAS1:SOUrce?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:MEAS1:SOURCE CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "MEASUrement:MEAS<x>:SOUrce2",
+   "page": "2-145",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:MEAS1:SOUrce2?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:MEAS1:SOURCE2 CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "MEASUrement:MEAS<x>:TYPe",
+   "page": "2-146",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:MEAS1:TYPe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:MEAS1:TYPE FREQUENCY",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "MEASUrement:MEAS<x>:UNIts?",
+   "page": "2-149",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:MEAS1:UNIts?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:MEAS1:UNITS \"Hz\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "MEASUrement:MEAS<x>:VALue?",
+   "page": "2-150",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "MEASUrement:MEAS1:VALue?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":MEASUREMENT:MEAS1:VALUE 9.999999389648E2",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.14
+  },
+  {
+   "header": "MEASUrement:SNAPSHOT",
+   "page": "2-151",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "MEASUrement:SNAPSOUrce",
+   "page": "2-151",
+   "group": "Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "MEASUrement:SNAPSOUrce?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "*OPC",
+   "page": "2-152",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*OPC?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "PICTBridge:DATEPRINT",
+   "page": "2-152",
+   "group": "PictBridge",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "PICTBridge:DATEPRINT?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":PICTBRIDGE:DATEPRINT DEFLT",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "PICTBridge:DEF",
+   "page": "2-153",
+   "group": "PictBridge",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "PICTBridge:IDPRINT",
+   "page": "2-153",
+   "group": "PictBridge",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "PICTBridge:IDPRINT?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":PICTBRIDGE:IDPRINT DEFLT",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.079
+  },
+  {
+   "header": "PICTBridge:IMAGESIZE",
+   "page": "2-154",
+   "group": "PictBridge",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "PICTBridge:IMAGESIZE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":PICTBRIDGE:IMAGESIZE DEFLT",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "PICTBridge:PAPERSIZE",
+   "page": "2-155",
+   "group": "PictBridge",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "PICTBridge:PAPERSIZE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":PICTBRIDGE:PAPERSIZE DEFLT",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.11
+  },
+  {
+   "header": "PICTBridge:PAPERTYPE",
+   "page": "2-155",
+   "group": "PictBridge",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "PICTBridge:PAPERTYPE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":PICTBRIDGE:PAPERTYPE DEFLT",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "PICTBridge:PRINTQUAL",
+   "page": "2-156",
+   "group": "PictBridge",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "PICTBridge:PRINTQUAL?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":PICTBRIDGE:PRINTQUAL DEFLT",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "POWer?",
+   "page": "2-156",
+   "group": "Power and Battery-Related",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "POWer?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.016
+  },
+  {
+   "header": "POWer:AC:PRESENt?",
+   "page": "2-157",
+   "group": "Power and Battery-Related",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "POWer:AC:PRESENt?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "POWer:BATTERIES:TIME?",
+   "page": "2-158",
+   "group": "Power and Battery-Related",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "POWer:BATTERIES:TIME?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "POWer:BATTERY<x>:GASgauge?",
+   "page": "2-157",
+   "group": "Power and Battery-Related",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "POWer:BATTERY1:GASgauge?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "POWer:BATTERY<x>:STATUS?",
+   "page": "2-158",
+   "group": "Power and Battery-Related",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "POWer:BATTERY1:STATUS?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "POWer:BUTTONLIGHT",
+   "page": "2-158",
+   "group": "Power and Battery-Related",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "POWer:BUTTONLIGHT?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "POWerANALYSIS:SOUrces",
+   "page": "2-159",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "POWerANALYSIS:SOUrces?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.046
+  },
+  {
+   "header": "*PSC",
+   "page": "2-160",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*PSC?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "*RCL",
+   "page": "2-160",
+   "group": "Save and Recall",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "RECAll:SETUp",
+   "page": "2-161",
+   "group": "Save and Recall",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "RECAll:WAVEForm",
+   "page": "2-162",
+   "group": "Save and Recall",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "REM",
+   "page": "2-162",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "RS232?",
+   "page": "2-163",
+   "group": "RS-232",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "RS232?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":RS232:BAUD 9600;HARDFLAGGING 1;SOFTFLAGGING 0;PARITY NONE;TRANSMIT:TERMINATOR LF",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.204
+  },
+  {
+   "header": "RS232:BAUd",
+   "page": "2-163",
+   "group": "RS-232",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "RS232:BAUd?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":RS232:BAUD 9600",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "RS232:HARDFlagging",
+   "page": "2-164",
+   "group": "RS-232",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "RS232:HARDFlagging?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":RS232:HARDFLAGGING 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "RS232:PARity",
+   "page": "2-164",
+   "group": "RS-232",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "RS232:PARity?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":RS232:PARITY NONE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "RS232:SOFTFlagging",
+   "page": "2-165",
+   "group": "RS-232",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "RS232:SOFTFlagging?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":RS232:SOFTFLAGGING 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "*RST",
+   "page": "2-166",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form shown in syntax or description",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "*SAV",
+   "page": "2-167",
+   "group": "Save and Recall",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "SAVe:IMAge",
+   "page": "2-168",
+   "group": "Save and Recall",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "SAVe:IMAge:FILEFormat",
+   "page": "2-169",
+   "group": "Save and Recall",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "SAVe:SETUp",
+   "page": "2-170",
+   "group": "Save and Recall",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "SAVe:WAVEform",
+   "page": "2-170",
+   "group": "Save and Recall",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "SELect?",
+   "page": "2-172",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "SELect?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":SELECT:CH1 1;CH2 0;MATH 0;REFA 0;REFB 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.281
+  },
+  {
+   "header": "SELect:<wfm>",
+   "page": "2-172",
+   "group": "Vertical",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "SELect:CH1?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":SELECT:CH1 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "SELect:FFT",
+   "page": "2-173",
+   "group": "FFT",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SELect:FFT?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SET?",
+   "page": "2-173",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "SET?",
+   "status": "accepted_slow",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":HEADER 1;:VERBOSE 1;:DATA:ENCDG RIBINARY;DESTINATION REFA;SOURCE CH2;START 1;STOP 2500;WIDTH 1;:LOCK NONE;:DISPLAY:FORMAT YT;STYLE VECTORS;PERSISTENCE 0;CONTRAST 50;INVERT OFF;:ACQUIRE:MODE SAMPLE;NUMAVG 16;STATE 1;STOPAFTER RUNSTOP;:CH1:PROBE 1.0E1;CURRENTPROBE 1.0E1;SCALE 2.0E0;POSITION 0.0E0;COUPLING DC;BANDWIDTH OFF;INVERT OFF;YUNIT \"V\";:CH2:PROBE 1.0E1;CURRENTPROBE 1.0E1;SCALE 5.0E-1;POSITION 0.0E0;COUPLING DC;BANDWIDTH OFF;INVERT OFF;YUNIT \"V\";:HORIZONTAL:VIEW MAIN;MAIN:SCALE 5.0E-4;POSITION 0.0E0;:HORIZONTAL:DELAY:SCALE 5.0E-9;POSITION 0.0E0;:TRIGGER:MAIN:MODE AUTO;TYPE EDGE;HOLDOFF:VALUE 5.0E-7;:TRIGGER:MAIN:EDGE:SOURCE CH1;COUPLING DC;SLOPE RISE;:TRIGGER:MAIN:VIDEO:SOURCE CH1;SYNC FIELD;POLARITY NORMAL;LINE 1;STANDARD NTSC;:TRIGGER:MAIN:PULSE:SOURCE CH1;WIDTH:POLARITY NEGATIVE;WHEN OUTSIDE;WIDTH 7.5002E-3;:TRIGGER:MAIN:LEVEL 2.56E0;:SELECT:CH1 1;CH2 0;MATH 0;REFA 0;REFB 0;:CURSOR:FUNCTION OFF;SELECT:SOURCE CH1;:CURSOR:VBARS:UNITS SECONDS;POSITION1 -7.8E-4;POSITION2 5.0E-4;:CURSOR:HBARS:POSITION1 6.4E0;POSITION2 -6.4E0;:MEASUREMENT:MEAS1:TYPE FREQUENCY;SOURCE CH1;:MEASUREMENT:MEAS2:TYPE PERIOD;SOURCE CH1;:MEASUREMENT:MEAS3:TYPE MAXIMUM;SOURCE CH1;:MEASUREMENT:MEAS4:TYPE FREQUENCY;SOURCE CH1;:MEASUREMENT:MEAS5:TYPE MEAN;SOURCE CH2;:MEASUREMENT:IMMED:TYPE PERIOD;SOURCE1 CH1;:MEASUREMENT:METHOD AUTO;:MATH:DEFINE \"CH1 - CH2\";VERTICAL:POSITION 0.0E0;SCALE 2.0E0;:MATH:FFT:HORIZONTAL:POSITION 5.0E1;SCALE 1.0E0;:MATH:FFT:VERTICAL:POSITION 0.0E0;SCALE 1.0E0;:HARDCOPY:BUTTON SAVESIMAGE;FORMAT JPEG;PORT USB;LAYOUT PORTRAIT;INKSAVER OFF;:PICTBRIDGE:PAPERSIZE DEFLT;IMAGESIZE DEFLT;PAPERTYPE DEFLT;PRINTQUAL DEFLT;DATEPRINT DEFLT;IDPRINT DEFLT;:LANGUAGE PORTUGUESE;:AUTORANGE:SETTINGS BOTH;:SAVE:IMAGE:FILEFORMAT JPEG",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 4.906
+  },
+  {
+   "header": "*SRE",
+   "page": "2-174",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*SRE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "*STB?",
+   "page": "2-174",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "*STB?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": "0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.047
+  },
+  {
+   "header": "SWLoss?",
+   "page": "2-175",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:ACQuire",
+   "page": "2-175",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:ACQuire?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "SWLoss:AVErage:CONDUCTION?",
+   "page": "2-176",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:AVErage:CONDUCTION?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.046
+  },
+  {
+   "header": "SWLoss:AVErage:N?",
+   "page": "2-176",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:AVErage:N?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "SWLoss:AVErage:TOTAL?",
+   "page": "2-177",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:AVErage:TOTAL?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "SWLoss:AVErage:TURNOFF?",
+   "page": "2-177",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:AVErage:TURNOFF?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:AVErage:TURNON?",
+   "page": "2-178",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:AVErage:TURNON?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:ENABLe",
+   "page": "2-178",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:ENABLe?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "SWLoss:LEVELS",
+   "page": "2-179",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "SWLoss:LOG:CONDUCTION?",
+   "page": "2-179",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:LOG:CONDUCTION?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:LOG:INDEX",
+   "page": "2-180",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:LOG:INDEX?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:LOG:TOTAL?",
+   "page": "2-180",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:LOG:TOTAL?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "SWLoss:LOG:TURNOFF?",
+   "page": "2-181",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:LOG:TURNOFF?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:LOG:TURNON?",
+   "page": "2-182",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:LOG:TURNON?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:SAVE",
+   "page": "2-182",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:SAVE?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "SWLoss:SOURCES",
+   "page": "2-183",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:SOURCES?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:STOPAfter",
+   "page": "2-183",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:STOPAfter?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "SWLoss:TOFFEND",
+   "page": "2-184",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:TOFFEND?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:TOFFSTART",
+   "page": "2-185",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:TOFFSTART?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.046
+  },
+  {
+   "header": "SWLoss:TONEND",
+   "page": "2-184",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:TONEND?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:TONSTART",
+   "page": "2-186",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:TONSTART?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "SWLoss:UNITs",
+   "page": "2-186",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:UNITs?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:VALue:CONDUCTION?",
+   "page": "2-187",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:VALue:CONDUCTION?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:VALue:TOTAL?",
+   "page": "2-187",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:VALue:TOTAL?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "SWLoss:VALue:TURNOFF?",
+   "page": "2-188",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:VALue:TURNOFF?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "SWLoss:VALue:TURNON?",
+   "page": "2-188",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:VALue:TURNON?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "SWLoss:VSAT",
+   "page": "2-189",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "SWLoss:VSAT?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "TIMe",
+   "page": "2-189",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TIMe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TIME \"20:22:00\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "TRENDPLOT?",
+   "page": "2-190",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "TRENDPLOT:STATE",
+   "page": "2-190",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:STATE?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "TRENDPLOT:TIME",
+   "page": "2-190",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TIME?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "TRENDPLOT:TP<x>:AVG?",
+   "page": "2-190",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TP1:AVG?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "TRENDPLOT:TP<x>:MAX?",
+   "page": "2-191",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TP1:MAX?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "TRENDPLOT:TP<x>:MIN?",
+   "page": "2-191",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TP1:MIN?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "TRENDPLOT:TP<x>:SCALE?",
+   "page": "2-191",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TP1:SCALE?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "TRENDPLOT:TP<x>:SCALEMAX?",
+   "page": "2-192",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TP1:SCALEMAX?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.046
+  },
+  {
+   "header": "TRENDPLOT:TP<x>:SCALEMIN?",
+   "page": "2-192",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TP1:SCALEMIN?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "TRENDPLOT:TP<x>:SOURCE",
+   "page": "2-192",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TP1:SOURCE?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "TRENDPLOT:TP<x>:TYPe",
+   "page": "2-192",
+   "group": "Trend plot",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "TRENDPLOT:TP1:TYPe?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.046
+  },
+  {
+   "header": "*TRG",
+   "page": "2-193",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "TRIGger",
+   "page": "2-193",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:MODE AUTO;TYPE EDGE;HOLDOFF:VALUE 5.0E-7;:TRIGGER:MAIN:EDGE:SOURCE CH1;COUPLING DC;SLOPE RISE;:TRIGGER:MAIN:VIDEO:SOURCE CH1;SYNC FIELD;POLARITY NORMAL;LINE 1;STANDARD NTSC;:TRIGGER:MAIN:PULSE:SOURCE CH1;WIDTH:POLARITY NEGATIVE;WHEN OUTSIDE;WIDTH 7.5002E-3;:TRIGGER:MAIN:LEVEL 2.56E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.765
+  },
+  {
+   "header": "TRIGger:MAIn",
+   "page": "2-194",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:MODE AUTO;TYPE EDGE;HOLDOFF:VALUE 5.0E-7;:TRIGGER:MAIN:EDGE:SOURCE CH1;COUPLING DC;SLOPE RISE;:TRIGGER:MAIN:VIDEO:SOURCE CH1;SYNC FIELD;POLARITY NORMAL;LINE 1;STANDARD NTSC;:TRIGGER:MAIN:PULSE:SOURCE CH1;WIDTH:POLARITY NEGATIVE;WHEN OUTSIDE;WIDTH 7.5002E-3;:TRIGGER:MAIN:LEVEL 2.56E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.735
+  },
+  {
+   "header": "TRIGger:MAIn:EDGE?",
+   "page": "2-194",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:EDGE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:EDGE:SOURCE CH1;COUPLING DC;SLOPE RISE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.187
+  },
+  {
+   "header": "TRIGger:MAIn:EDGE:COUPling",
+   "page": "2-195",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:EDGE:COUPling?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:EDGE:COUPLING DC",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "TRIGger:MAIn:EDGE:SLOpe",
+   "page": "2-195",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:EDGE:SLOpe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:EDGE:SLOPE RISE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "TRIGger:MAIn:EDGE:SOUrce",
+   "page": "2-196",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:EDGE:SOUrce?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:EDGE:SOURCE CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.11
+  },
+  {
+   "header": "TRIGger:MAIn:FREQuency?",
+   "page": "2-196",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:FREQuency?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:FREQUENCY 9.99999760869383E2",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.125
+  },
+  {
+   "header": "TRIGger:MAIn:HOLDOff?",
+   "page": "2-197",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:HOLDOff?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:HOLDOFF:VALUE 5.0E-7",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "TRIGger:MAIn:HOLDOff:VALue",
+   "page": "2-197",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:HOLDOff:VALue?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:HOLDOFF:VALUE 5.0E-7",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "TRIGger:MAIn:LEVel",
+   "page": "2-197",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:LEVel?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:LEVEL 2.56E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "TRIGger:MAIn:MODe",
+   "page": "2-198",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:MODe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:MODE AUTO",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "TRIGger:MAIn:PULse?",
+   "page": "2-199",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:PULse?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:PULSE:SOURCE CH1;WIDTH:POLARITY NEGATIVE;WHEN OUTSIDE;WIDTH 7.5002E-3",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.25
+  },
+  {
+   "header": "TRIGger:MAIn:PULse:SOUrce",
+   "page": "2-199",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:PULse:SOUrce?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:PULSE:SOURCE CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "TRIGger:MAIn:PULse:WIDth?",
+   "page": "2-199",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:PULse:WIDth?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:PULSE:WIDTH:POLARITY NEGATIVE;WHEN OUTSIDE;WIDTH 7.5002E-3",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.219
+  },
+  {
+   "header": "TRIGger:MAIn:PULse:WIDth:POLarity",
+   "page": "2-200",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:PULse:WIDth:POLarity?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:PULSE:WIDTH:POLARITY NEGATIVE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.11
+  },
+  {
+   "header": "TRIGger:MAIn:PULse:WIDth:WHEN",
+   "page": "2-200",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:PULse:WIDth:WHEN?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:PULSE:WIDTH:WHEN OUTSIDE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "TRIGger:MAIn:PULse:WIDth:WIDth",
+   "page": "2-201",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:PULse:WIDth:WIDth?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:PULSE:WIDTH:WIDTH 7.5002E-3",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.125
+  },
+  {
+   "header": "TRIGger:MAIn:TYPe",
+   "page": "2-201",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:TYPe?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:TYPE EDGE",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "TRIGger:MAIn:VIDeo?",
+   "page": "2-202",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:VIDeo?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:VIDEO:SOURCE CH1;SYNC FIELD;POLARITY NORMAL;LINE 1;STANDARD NTSC",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.219
+  },
+  {
+   "header": "TRIGger:MAIn:VIDeo:LINE",
+   "page": "2-202",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:VIDeo:LINE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:VIDEO:LINE 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "TRIGger:MAIn:VIDeo:POLarity",
+   "page": "2-203",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:VIDeo:POLarity?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:VIDEO:POLARITY NORMAL",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.079
+  },
+  {
+   "header": "TRIGger:MAIn:VIDeo:SOUrce",
+   "page": "2-203",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:VIDeo:SOUrce?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:VIDEO:SOURCE CH1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "TRIGger:MAIn:VIDeo:STANDard",
+   "page": "2-204",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:VIDeo:STANDard?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:VIDEO:STANDARD NTSC",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "TRIGger:MAIn:VIDeo:SYNC",
+   "page": "2-204",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:MAIn:VIDeo:SYNC?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:MAIN:VIDEO:SYNC FIELD",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "TRIGger:STATE?",
+   "page": "2-205",
+   "group": "Trigger",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "TRIGger:STATE?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":TRIGGER:STATE TRIGGER",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "*TST?",
+   "page": "2-206",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "excluded",
+   "reason_not_sent": "blocklist (CLAUDE.md): *TST is blocked",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "UNLock",
+   "page": "2-206",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "VERBose",
+   "page": "2-207",
+   "group": "Miscellaneous",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "VERBose?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":VERBOSE 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "*WAI",
+   "page": "2-207",
+   "group": "Status and Error",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "no_query_form",
+   "reason_not_sent": "no query form (heading and syntax)",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "WAVEFORMANALYSIS:SOUrce",
+   "page": "2-208",
+   "group": "Power Measurement",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "WAVEFORMANALYSIS:SOUrce?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.063
+  },
+  {
+   "header": "WAVFrm?",
+   "page": "2-208",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": null,
+   "status": "excluded",
+   "reason_not_sent": "WAVFrm? returns WFMPre? plus CURVe? (binary waveform transfer); excluded with CURVe?",
+   "responded": false,
+   "response": null,
+   "event_code": null,
+   "esr": null,
+   "seconds": null
+  },
+  {
+   "header": "WFMPre?",
+   "page": "2-209",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:BYT_NR 1;BIT_NR 8;ENCDG BIN;BN_FMT RI;BYT_OR MSB",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.391
+  },
+  {
+   "header": "WFMPre:<wfm>?",
+   "page": "2-210",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:WFID \"Ch1, DC coupling, 2.0E0 V/div, 5.0E-4 s/div, 2500 points, Sample mode\";PT_FMT Y;XINCR 2.0E-6;PT_OFF 0;XZERO -2.5E-3;XUNIT \"s\";YMULT 8.0E-2;YZERO 0.0E0;YOFF 0.0E0;YUNIT \"Volts\";NR_PT 2500",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.672
+  },
+  {
+   "header": "WFMPre:<wfm>:NR_Pt?",
+   "page": "2-213",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:NR_Pt?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:NR_PT 2500",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "WFMPre:<wfm>:YZEro",
+   "page": "2-210",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:YZEro?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:YZERO 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "WFMPre:BIT_Nr",
+   "page": "2-210",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:BIT_Nr?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:BIT_NR 8",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "WFMPre:BN_Fmt",
+   "page": "2-211",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:BN_Fmt?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:BN_FMT RI",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "WFMPre:BYT_Nr",
+   "page": "2-211",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:BYT_Nr?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:BYT_NR 1",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "WFMPre:BYT_Or",
+   "page": "2-212",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:BYT_Or?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:BYT_OR MSB",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.062
+  },
+  {
+   "header": "WFMPre:ENCdg",
+   "page": "2-212",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:ENCdg?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:ENCDG BIN",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.063
+  },
+  {
+   "header": "WFMPre:NR_Pt?",
+   "page": "2-213",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:NR_Pt?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.031
+  },
+  {
+   "header": "WFMPre:PT_Fmt",
+   "page": "2-214",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:PT_Fmt?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.047
+  },
+  {
+   "header": "WFMPre:PT_Off",
+   "page": "2-215",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:PT_Off?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.047
+  },
+  {
+   "header": "WFMPre:WFId?",
+   "page": "2-216",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:WFId?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.047
+  },
+  {
+   "header": "WFMPre:XINcr",
+   "page": "2-216",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:XINcr?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.047
+  },
+  {
+   "header": "WFMPre:XUNit",
+   "page": "2-217",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:XUNit?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.031
+  },
+  {
+   "header": "WFMPre:XZEro",
+   "page": "2-218",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:XZEro?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.046
+  },
+  {
+   "header": "WFMPre:YMUlt",
+   "page": "2-219",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:YMUlt?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.047
+  },
+  {
+   "header": "WFMPre:YOFf",
+   "page": "2-220",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:YOFf?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.032
+  },
+  {
+   "header": "WFMPre:YUNit",
+   "page": "2-220",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:YUNit?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.047
+  },
+  {
+   "header": "WFMPre:YZEro",
+   "page": "2-222",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:YZEro?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    2244,
+    420
+   ],
+   "esr": 20,
+   "seconds": 5.031
+  },
+  {
+   "header": "ZOOM?",
+   "page": "2-223",
+   "group": "Zoom",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "ZOOM?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "ZOOM:FACtor",
+   "page": "2-223",
+   "group": "Zoom",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "ZOOM:FACtor?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "ZOOM:HORizontal:POSition",
+   "page": "2-223",
+   "group": "Zoom",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "ZOOM:HORizontal:POSition?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "ZOOM:HORizontal:SCAle?",
+   "page": "2-224",
+   "group": "Zoom",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "ZOOM:HORizontal:SCAle?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "ZOOM:MODE",
+   "page": "2-224",
+   "group": "Zoom",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "ZOOM:MODE?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "ZOOM:STATE",
+   "page": "2-224",
+   "group": "Zoom",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "ZOOM:STATE?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    113,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.046
+  },
+  {
+   "header": "RS232:TRANsmit:TERMinator",
+   "page": "2-166",
+   "group": "RS-232",
+   "documented_for_tds1000c_edu": false,
+   "query_sent": "RS232:TRANsmit:TERMinator?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":RS232:TRANSMIT:TERMINATOR LF",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "WFMPre:<wfm>:PT_Fmt",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:PT_Fmt?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:PT_FMT Y",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "WFMPre:<wfm>:PT_Off",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:PT_Off?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:PT_OFF 0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.078
+  },
+  {
+   "header": "WFMPre:<wfm>:WFId?",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:WFId?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:WFID \"Ch1, DC coupling, 2.0E0 V/div, 5.0E-4 s/div, 2500 points, Sample mode\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.156
+  },
+  {
+   "header": "WFMPre:<wfm>:XINcr",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:XINcr?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:XINCR 2.0E-6",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "WFMPre:<wfm>:XUNit",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:XUNit?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:XUNIT \"s\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.093
+  },
+  {
+   "header": "WFMPre:<wfm>:XZEro",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:XZEro?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:XZERO -2.5E-3",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.14
+  },
+  {
+   "header": "WFMPre:<wfm>:YMUlt",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:YMUlt?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:YMULT 8.0E-2",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.109
+  },
+  {
+   "header": "WFMPre:<wfm>:YOFf",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:YOFf?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:YOFF 0.0E0",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "WFMPre:<wfm>:YUNit",
+   "page": "",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:CH1:YUNit?",
+   "status": "accepted",
+   "reason_not_sent": null,
+   "responded": true,
+   "response": ":WFMPRE:CH1:YUNIT \"Volts\"",
+   "event_code": [
+    0
+   ],
+   "esr": 0,
+   "seconds": 0.094
+  },
+  {
+   "header": "WFMPre:XMUlt",
+   "page": "2-209",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:XMUlt?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    100,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "WFMPre:XOFf",
+   "page": "2-209",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:XOFf?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    100,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  },
+  {
+   "header": "WFMPre:ZMUlt",
+   "page": "2-209",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:ZMUlt?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    100,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.063
+  },
+  {
+   "header": "WFMPre:ZOFf",
+   "page": "2-209",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:ZOFf?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    100,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.031
+  },
+  {
+   "header": "WFMPre:ZUNit",
+   "page": "2-209",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:ZUNit?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    100,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.047
+  },
+  {
+   "header": "WFMPre:ZZEro",
+   "page": "2-209",
+   "group": "Waveform",
+   "documented_for_tds1000c_edu": true,
+   "query_sent": "WFMPre:ZZEro?",
+   "status": "no_response",
+   "reason_not_sent": null,
+   "responded": false,
+   "response": null,
+   "event_code": [
+    100,
+    420
+   ],
+   "esr": 36,
+   "seconds": 5.032
+  }
+ ],
+ "set_headers_not_in_manual": [
+  {
+   "header": "MEASUREMENT:METHOD",
+   "value": "AUTO"
+  }
+ ]
+}

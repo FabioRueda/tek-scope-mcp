@@ -11,10 +11,12 @@ This is an independent project. It is not affiliated with, sponsored by or endor
 | Repository layout, safety rules, build prompts | done |
 | USB connection (VISA backend, `*IDN?`) | done, tested on hardware: NI-VISA 2026 Q4 on Windows 11, `*IDN?` answered 3 times in a row, `SET?` read. See [docs/connection.md](docs/connection.md). |
 | Control library `tek_scope.py` | done, acceptance passed on hardware with the probe compensation signal on CH1 (1.000 kHz, 5.20 V peak to peak, 2500-point waveform, screen capture, no errors, `SET?` restored). Unit tests with a fake instrument in [tests/](tests/). `*SAV` and `*RCL` were added to the blocklist later; that change has unit tests only and was not sent to the hardware. |
-| Command map (which queries the instrument answers) | not started |
+| Command map (which queries the instrument answers) | done, run on hardware: all 345 headers of the manual classified, 301 queries sent, 179 accepted (7 of them documented only for other series), `SET?` and `CALibrate:STATUS?` unchanged at the end. See [docs/COMMAND-MAP.md](docs/COMMAND-MAP.md). |
 | MCP server `server.py` | not started |
 
 Tested on hardware so far: opening the USB resource; `*CLS`, `*IDN?`, `*ESR?`, `*OPC?`, `ALLEv?`, `BUSY?`, `HEADer`, `VERBose`, `SET?` and sending it back; `CH1:PRObe`; `TRIGger:MAIn:LEVel` and `TRIGger:MAIn SETLevel`; `MEASUrement:IMMed:SOUrce`, `:TYPe` (`FREQuency`, `PK2pk`), `:VALue?`; `DATa:SOUrce`, `:ENCdg RIBinary`, `:WIDth 1`, `:STARt`, `:STOP`, `WFMPre?`, `CURVe?`; `HARDCopy:FORMat BMP`, `HARDCopy:PORT USB`, `HARDCopy STARt`.
+
+The command map (build step 3) sent the query form of every documented header that has one; the replies are in [docs/scpi_map.json](docs/scpi_map.json). Not sent by design: commands without a query form, `CURVe?`, `WAVFrm?`, `HARDCopy?` and the blocklist. The only writes were `HEADer` and `VERBose`, set back at the end.
 
 Implemented but not yet run on hardware: the other channel setters (`SCAle`, `POSition`, `COUPling`, `BANdwidth`, `INVert`), horizontal scale and position, the other edge-trigger setters, `TRIGger:STATE?`, `run()`, `stop()`, `single()`, `autoset()` and `ACQuire:MODe`/`NUMAVg`. Not tested: the pyvisa-py + Zadig path, other Windows versions, other instrument models. This table is updated at the end of each build step, with what was tested and what was not.
 
@@ -23,6 +25,11 @@ Known limits found on hardware:
 - A trigger level set from the front panel or by autoset can be finer than what `TRIGger:MAIn:LEVel` accepts. By command, the level moves in steps (0.08 V at 2 V/div), so restoring such a `SET?` gives the nearest step.
 - `SET?` contains `:SAVE:IMAGE:FILEFORMAT`, which is in the blocklist. `restore()` leaves it out. On this model `HARDCopy:FORMat` changes the saved-image format too, so the value still comes back.
 - Sending the whole `SET?` text in one write can take longer than 10 s. `restore()` sends it in groups, with a 30 s timeout.
+- Reading `SET?` (and `*LRN?`) takes about 5 s.
+- A query the instrument does not know gets no reply, so the read waits for the timeout. With NI-VISA a 3 s timeout waited about 5 s.
+- After about 50 such timeouts in one VISA session, each followed by a USBTMC device clear, the device clear failed (`VI_ERROR_INV_PARAMETER`) and the next write failed (`VI_ERROR_SYSTEM_ERROR`). Reading the status byte right after an unknown command failed the same way. The instrument itself kept working: a new session answered at once. `scripts/explore_scpi.py` closes and reopens the session after every timeout instead.
+- The `WFMPre:<field>?` queries describe the `DATa:SOUrce` waveform. When that waveform is not displayed they give event 2244 and no reply; `WFMPre:CH1:<field>?` still works.
+- The instrument answers the `RS232` queries and `MEASUrement:IMMed:SOURCE2?`, which the manual lists only for other series.
 
 ## Using the library
 
@@ -36,6 +43,8 @@ with TekScope() as scope:          # finds the first Tektronix USB instrument, o
     scope.save_csv("ch1.csv")
     scope.screenshot("screen.png")
 ```
+
+To rebuild the command map: `python scripts/extract_manual_commands.py <manual.pdf>` (needs `pdftotext`) writes [docs/manual-commands.json](docs/manual-commands.json); `python scripts/explore_scpi.py run` probes the instrument, and `python scripts/explore_scpi.py report <log> <SET? file>` writes the map.
 
 Only one process can hold the instrument at a time (a lock file in `local/`). Every write is logged to `local/logs/escritas.log`. Blocked commands raise `BlockedCommandError` unless `allow_dangerous=True` is passed. `scripts/hardware_acceptance.py` runs the build-step 2 acceptance and restores the settings afterwards.
 
