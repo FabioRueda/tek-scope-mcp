@@ -20,7 +20,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from tek_scope import TekScope
+from tek_scope import RestoreError, TekScope
 
 
 def plot(t, v, pre, path):
@@ -71,8 +71,11 @@ def main() -> int:
             result["accept_4"] = result["screen_bytes"] > 0
             result["errors_during_test"] = s.errors()
         finally:
-            removed = s.restore(before)
-            s.query("*OPC?")
+            try:
+                removed = s.restore(before)
+            except RestoreError as exc:  # report it (accept_6 will fail); do not hide it
+                removed = []
+                result["restore_error"] = str(exc)
             after = s.state()
             (backup_dir / f"SET-depois-{stamp}.txt").write_text(after, encoding="utf-8")
             result["restore_removed"] = removed

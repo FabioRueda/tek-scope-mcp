@@ -48,7 +48,14 @@ class WaveformError(RuntimeError):
 
 
 class RestoreError(RuntimeError):
-    """restore() could not make SET? equal to the text it was given."""
+    """restore() could not make SET? equal to the text it was given.
+
+    `differences` lists what still differed at the end (empty if the problem was the connection).
+    """
+
+    def __init__(self, message: str, differences=()):
+        super().__init__(message)
+        self.differences = list(differences)
 
 
 # ---------------------------------------------------------------------------
@@ -412,7 +419,8 @@ class TekScope:
         not *OPC?: twice the instrument left the USB bus right after the writes, and the *OPC? that
         followed timed out (see RELATORIO-5). If a write fails, or SET? still differs, the whole
         restore runs again in a new session (up to RESTORE_ATTEMPTS, with a pause after a failure).
-        Raises RestoreError if it still fails.
+        Raises RestoreError if it still fails, or at once if SET? shows the same difference twice (a
+        value the instrument does not take, such as a trigger level between its steps).
         """
         clean, removed = strip_blocked_segments(set_text)
         # One message per absolute header and its relative followers: the whole
@@ -425,7 +433,9 @@ class TekScope:
                 groups[-1].append(seg)
         wanted = [seg.strip() for seg in _split_segments(set_text.strip())]
         problem = ""
+        diffs: list[str] = []
         for attempt in range(1, RESTORE_ATTEMPTS + 1):
+            previous = diffs
             try:
                 self._send_groups(groups)
                 self.reconnect()
@@ -433,7 +443,7 @@ class TekScope:
             except BlockedCommandError:
                 raise
             except Exception as exc:  # noqa: BLE001  timeout or I/O error: the USB link dropped
-                problem = f"{type(exc).__name__}: {exc}"
+                problem, diffs = f"{type(exc).__name__}: {exc}", []
                 self._log(f"RESTORE-RETRY\tattempt {attempt}\t{problem}")
                 if attempt < RESTORE_ATTEMPTS:
                     time.sleep(self.restore_pause_s)
@@ -448,7 +458,9 @@ class TekScope:
                 return removed
             problem = "SET? differs: " + "; ".join(diffs[:5])
             self._log(f"RESTORE-RETRY\tattempt {attempt}\t{problem}")
-        raise RestoreError(f"restore failed after {RESTORE_ATTEMPTS} attempts. {problem}")
+            if diffs == previous:  # same answer twice: the instrument does not take that value
+                break
+        raise RestoreError(f"restore failed after {attempt} attempts. {problem}", diffs)
 
     # -- channels ---------------------------------------------------------------
 

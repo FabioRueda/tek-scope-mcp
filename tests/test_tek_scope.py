@@ -361,14 +361,27 @@ def test_restore_tries_again_when_the_check_finds_a_difference(tmp_path):
 
 
 def test_restore_raises_when_set_still_differs_after_all_attempts(tmp_path):
-    other = ":HEADER 0;:LANGUAGE ENGLISH;:SAVE:IMAGE:FILEFORMAT JPEG"
-    first = FakeResource()
-    later = [FakeResource({"SET?": other}) for _ in range(RESTORE_ATTEMPTS)]
-    s = make_scope(tmp_path, first, later)
+    # a different wrong value each time, so it does not look like a value the instrument refuses
+    languages = ["ENGLISH", "FRENCH", "GERMAN"][:RESTORE_ATTEMPTS]
+    later = [FakeResource({"SET?": f":HEADER 0;:LANGUAGE {lang};:SAVE:IMAGE:FILEFORMAT JPEG"}) for lang in languages]
+    s = make_scope(tmp_path, FakeResource(), later)
     with pytest.raises(RestoreError, match="LANGUAGE"):
         s.restore(SET_TEXT)
     s.close()
     assert [r.written.count("SET?") for r in later] == [1] * RESTORE_ATTEMPTS
+
+
+def test_restore_stops_when_the_same_difference_comes_back(tmp_path):
+    # e.g. a trigger level the instrument rounds to a step: sending it again cannot help
+    other = ":HEADER 0;:LANGUAGE ENGLISH;:SAVE:IMAGE:FILEFORMAT JPEG"
+    later = [FakeResource({"SET?": other}) for _ in range(RESTORE_ATTEMPTS)]
+    s = make_scope(tmp_path, FakeResource(), later)
+    with pytest.raises(RestoreError, match="LANGUAGE") as info:
+        s.restore(SET_TEXT)
+    s.close()
+    assert [r.written.count("SET?") for r in later[:2]] == [1, 1]
+    assert later[2].written == []  # the third attempt was not made
+    assert info.value.differences == ["':LANGUAGE PORTUGUESE' expected, ':LANGUAGE ENGLISH' found"]
 
 
 class DropsOnSecondWrite(FakeResource):
