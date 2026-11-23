@@ -6,7 +6,16 @@ import numpy as np
 import pytest
 from PIL import Image
 
-from tek_scope import BlockedCommandError, MeasurementError, ScopeLock, TekScope, WaveformError
+import tek_scope
+from tek_scope import (
+    RESTORE_ATTEMPTS,
+    BlockedCommandError,
+    MeasurementError,
+    RestoreError,
+    ScopeLock,
+    TekScope,
+    WaveformError,
+)
 
 
 class FakeResource:
@@ -276,11 +285,134 @@ def test_screenshot_truncated_bmp_raises(scope, tmp_path):
         scope.screenshot(tmp_path / "s.png")
 
 
+SET_TEXT = ":HEADER 0;:LANGUAGE PORTUGUESE;:SAVE:IMAGE:FILEFORMAT JPEG"
+
+
+def make_scope(tmp_path, first, later):
+    """A TekScope on `first` that gets one of `later` for each reconnect."""
+    pending = list(later)
+    s = TekScope(
+        resource=first,
+        reopen=lambda: pending.pop(0),
+        log_path=tmp_path / "w.log",
+        lock_path=tmp_path / "s.lock",
+    )
+    s.connect()
+    s.restore_pause_s = 0
+    return s
+
+
 def test_restore_sends_set_text_without_blocked_segment(scope):
-    scope.resource.answers = {"*OPC?": "1"}
-    removed = scope.restore(":HEADER 0;:LANGUAGE PORTUGUESE;:SAVE:IMAGE:FILEFORMAT JPEG")
-    assert scope.resource.written == [":HEADER 0", ":LANGUAGE PORTUGUESE", "*OPC?"]
+    scope.resource.answers = {"SET?": SET_TEXT}
+    removed = scope.restore(SET_TEXT)
+    assert scope.resource.written == [":HEADER 0", ":LANGUAGE PORTUGUESE", "SET?"]
     assert removed == [":SAVE:IMAGE:FILEFORMAT JPEG"]
+
+
+def test_restore_checks_in_a_new_session_and_does_not_ask_opc(tmp_path):
+    # The *OPC? at the end of restore() timed out when the instrument dropped off USB right after the
+    # writes. The check is now: open a new session and compare SET? with the text that was sent.
+    first, second = FakeResource(), FakeResource({"SET?": SET_TEXT})
+    s = make_scope(tmp_path, first, [second])
+    removed = s.restore(SET_TEXT)
+    s.close()
+    assert first.written == [":HEADER 0", ":LANGUAGE PORTUGUESE"]
+    assert first.closed
+    assert second.written == ["SET?"]
+    assert removed == [":SAVE:IMAGE:FILEFORMAT JPEG"]
+    assert second.timeout == 10000  # the 30 s for SET? was put back after the read
+
+
+def test_restore_reads_set_with_long_timeout(tmp_path):
+    first, second = FakeResource(), FakeResource({"SET?": SET_TEXT})
+    seen = []
+    original_query = second.query
+    second.query = lambda cmd: (seen.append(second.timeout), original_query(cmd))[1]
+    s = make_scope(tmp_path, first, [second])
+    s.restore(SET_TEXT)
+    s.close()
+    assert seen == [30000]
+
+
+def test_restore_resumes_in_a_new_session_when_usb_drops_midway(tmp_path):
+    class Drops(FakeResource):
+        def write(self, cmd):
+            if len(self.written) == 1:
+                raise OSError("VI_ERROR_IO")
+            super().write(cmd)
+
+    first, second, third = Drops(), FakeResource(), FakeResource({"SET?": SET_TEXT})
+    s = make_scope(tmp_path, first, [second, third])
+    s.restore(SET_TEXT)
+    s.close()
+    assert second.written == [":HEADER 0", ":LANGUAGE PORTUGUESE"]  # everything again in the new session
+    assert third.written == ["SET?"]  # and the check in yet another one
+
+
+def test_restore_tries_again_when_the_check_finds_a_difference(tmp_path):
+    first = FakeResource()
+    second = FakeResource({"SET?": ":HEADER 0;:LANGUAGE ENGLISH;:SAVE:IMAGE:FILEFORMAT JPEG"})
+    third = FakeResource({"SET?": SET_TEXT})
+    s = make_scope(tmp_path, first, [second, third])
+    s.restore(SET_TEXT)
+    s.close()
+    assert second.written == ["SET?", ":HEADER 0", ":LANGUAGE PORTUGUESE"]
+    assert third.written == ["SET?"]
+
+
+def test_restore_raises_when_set_still_differs_after_all_attempts(tmp_path):
+    other = ":HEADER 0;:LANGUAGE ENGLISH;:SAVE:IMAGE:FILEFORMAT JPEG"
+    first = FakeResource()
+    later = [FakeResource({"SET?": other}) for _ in range(RESTORE_ATTEMPTS)]
+    s = make_scope(tmp_path, first, later)
+    with pytest.raises(RestoreError, match="LANGUAGE"):
+        s.restore(SET_TEXT)
+    s.close()
+    assert [r.written.count("SET?") for r in later] == [1] * RESTORE_ATTEMPTS
+
+
+class DropsOnSecondWrite(FakeResource):
+    def write(self, cmd):
+        if len(self.written) == 1:
+            raise OSError("VI_ERROR_IO")
+        super().write(cmd)
+
+
+def test_restore_survives_two_drops_in_a_row(tmp_path):
+    # Seen on the instrument on 23/11/2026: the second attempt, started right after the first drop,
+    # dropped again. A third attempt after a pause worked.
+    later = [DropsOnSecondWrite(), FakeResource(), FakeResource({"SET?": SET_TEXT})]
+    s = make_scope(tmp_path, DropsOnSecondWrite(), later)
+    s.restore(SET_TEXT)
+    s.close()
+    assert later[1].written == [":HEADER 0", ":LANGUAGE PORTUGUESE"]
+    assert later[2].written == ["SET?"]
+
+
+def test_restore_pauses_before_trying_again(tmp_path, monkeypatch):
+    sleeps = []
+    monkeypatch.setattr(tek_scope.time, "sleep", sleeps.append)
+    s = make_scope(tmp_path, DropsOnSecondWrite(), [FakeResource(), FakeResource({"SET?": SET_TEXT})])
+    s.restore_pause_s = 5
+    s.restore(SET_TEXT)
+    s.close()
+    assert sleeps == [5]  # once, after the failed attempt; none after the good one
+
+
+def test_restore_gives_up_when_the_instrument_does_not_come_back(tmp_path):
+    class Dead(FakeResource):
+        def write(self, cmd):
+            raise OSError("VI_ERROR_IO")
+
+    def reopen():
+        raise RuntimeError("No Tektronix USB instrument found")
+
+    s = TekScope(resource=Dead(), reopen=reopen, log_path=tmp_path / "w.log", lock_path=tmp_path / "s.lock")
+    s.connect()
+    s.reconnect_wait_s = 0
+    with pytest.raises(RuntimeError, match="No Tektronix"):
+        s.restore(SET_TEXT)
+    s.close()
 
 
 def test_restore_sends_one_message_per_absolute_group_with_long_timeout(scope):
@@ -292,9 +424,10 @@ def test_restore_sends_one_message_per_absolute_group_with_long_timeout(scope):
         original_write(cmd)
 
     scope.resource.write = spy
-    scope.resource.answers = {"*OPC?": "1"}
-    scope.restore(":ACQUIRE:MODE SAMPLE;NUMAVG 16;:CH1:PROBE 1.0E1;SCALE 2.0E0")
-    assert scope.resource.written == [":ACQUIRE:MODE SAMPLE;NUMAVG 16", ":CH1:PROBE 1.0E1;SCALE 2.0E0", "*OPC?"]
+    text = ":ACQUIRE:MODE SAMPLE;NUMAVG 16;:CH1:PROBE 1.0E1;SCALE 2.0E0"
+    scope.resource.answers = {"SET?": text}
+    scope.restore(text)
+    assert scope.resource.written[:2] == [":ACQUIRE:MODE SAMPLE;NUMAVG 16", ":CH1:PROBE 1.0E1;SCALE 2.0E0"]
     assert seen == [30000, 30000]
     assert scope.resource.timeout == 10000
 

@@ -7,12 +7,15 @@ refused by write() and query() unless allow_dangerous=True is passed.
 
 from __future__ import annotations
 
+import contextlib
 import csv
 import datetime as _dt
 import io
+import itertools
 import os
 import struct
 import sys
+import time
 from pathlib import Path
 from typing import Self
 
@@ -25,6 +28,9 @@ TEKTRONIX_VID = "0x0699"
 
 DEFAULT_TIMEOUT_MS = 10_000
 LONG_TIMEOUT_MS = 30_000
+RECONNECT_WAIT_S = 30  # the instrument can leave the USB bus for a few seconds and come back
+RESTORE_ATTEMPTS = 3
+RESTORE_PAUSE_S = 5  # after a USB drop the instrument is not stable at once
 INVALID_MEASUREMENT = 9.9e37
 CHANNELS = (1, 2)
 
@@ -39,6 +45,10 @@ class MeasurementError(RuntimeError):
 
 class WaveformError(RuntimeError):
     """The waveform could not be read (for example, the channel is off)."""
+
+
+class RestoreError(RuntimeError):
+    """restore() could not make SET? equal to the text it was given."""
 
 
 # ---------------------------------------------------------------------------
@@ -223,33 +233,81 @@ def find_resource(rm) -> str:
 class TekScope:
     """TDS 1012C-EDU controller. Use as a context manager or call connect()/close()."""
 
-    def __init__(self, resource=None, resource_name=None, log_path=DEFAULT_LOG, lock_path=DEFAULT_LOCK):
+    def __init__(
+        self, resource=None, resource_name=None, log_path=DEFAULT_LOG, lock_path=DEFAULT_LOCK, reopen=None
+    ):
+        """`reopen` (tests only) is a function that returns a new resource, used by reconnect()."""
         self.resource = resource
         self.resource_name = resource_name
         self.log_path = Path(log_path)
         self._lock = ScopeLock(lock_path)
         self._rm = None
-        self._owns_resource = resource is None
+        self._reopen = reopen
+        self._owns_resource = resource is None or reopen is not None
+        self.reconnect_wait_s = RECONNECT_WAIT_S
+        self.restore_pause_s = RESTORE_PAUSE_S
         self.last_waveform = None
 
     # -- connection ---------------------------------------------------------
+
+    def _open_resource(self) -> None:
+        if self._reopen is not None:
+            self.resource = self._reopen()
+            return
+        import pyvisa
+
+        self._rm = pyvisa.ResourceManager()
+        try:
+            name = self.resource_name or find_resource(self._rm)
+            self.resource = self._rm.open_resource(name)
+        except Exception:
+            self._rm.close()
+            self._rm = None
+            raise
+
+    def _apply_defaults(self) -> None:
+        self.resource.timeout = DEFAULT_TIMEOUT_MS
+        self.resource.read_termination = "\n"
+        self.resource.write_termination = "\n"
 
     def connect(self) -> TekScope:
         self._lock.acquire()
         try:
             if self.resource is None:
-                import pyvisa
-
-                self._rm = pyvisa.ResourceManager()
-                name = self.resource_name or find_resource(self._rm)
-                self.resource = self._rm.open_resource(name)
-            self.resource.timeout = DEFAULT_TIMEOUT_MS
-            self.resource.read_termination = "\n"
-            self.resource.write_termination = "\n"
+                self._open_resource()
+            self._apply_defaults()
         except Exception:
             self._lock.release()
             raise
         return self
+
+    def reconnect(self) -> None:
+        """Close the VISA session and open a new one; the file lock stays with this process.
+
+        After a timeout or an I/O error the session is not trusted (no device clear). The instrument
+        sometimes leaves the USB bus for a few seconds, so opening is retried for `reconnect_wait_s`.
+        """
+        if not self._owns_resource:
+            self._apply_defaults()  # an injected resource has no session to reopen
+            return
+        with contextlib.suppress(Exception):  # the session may already be dead
+            if self.resource is not None:
+                self.resource.close()
+        self.resource = None
+        if self._rm is not None:
+            with contextlib.suppress(Exception):
+                self._rm.close()
+            self._rm = None
+        deadline = time.monotonic() + self.reconnect_wait_s
+        while True:
+            try:
+                self._open_resource()
+                break
+            except Exception:
+                if time.monotonic() >= deadline:
+                    raise
+                time.sleep(1)
+        self._apply_defaults()
 
     def close(self) -> None:
         try:
@@ -330,8 +388,32 @@ class TekScope:
             events.append((None, f"ESR={esr}"))
         return events
 
+    def _send_groups(self, groups: list[list[str]]) -> None:
+        old = self.resource.timeout
+        self.resource.timeout = LONG_TIMEOUT_MS
+        try:
+            for group in groups:
+                self.write(";".join(group))
+        finally:
+            self.resource.timeout = old
+
+    def _read_set(self) -> str:
+        old = self.resource.timeout
+        self.resource.timeout = LONG_TIMEOUT_MS  # SET? takes about 5 s
+        try:
+            return self.query("SET?")
+        finally:
+            self.resource.timeout = old
+
     def restore(self, set_text: str) -> list[str]:
-        """Send a SET? response back, without blocked segments. Returns what was removed."""
+        """Send a SET? response back, without blocked segments. Returns what was removed.
+
+        The check at the end is a new session that reads SET? and compares it with `set_text`. It is
+        not *OPC?: twice the instrument left the USB bus right after the writes, and the *OPC? that
+        followed timed out (see RELATORIO-5). If a write fails, or SET? still differs, the whole
+        restore runs again in a new session (up to RESTORE_ATTEMPTS, with a pause after a failure).
+        Raises RestoreError if it still fails.
+        """
         clean, removed = strip_blocked_segments(set_text)
         # One message per absolute header and its relative followers: the whole
         # SET? text in one write can stall the USB input past the timeout.
@@ -341,15 +423,32 @@ class TekScope:
                 groups.append([seg])
             else:
                 groups[-1].append(seg)
-        old = self.resource.timeout
-        self.resource.timeout = LONG_TIMEOUT_MS
-        try:
-            for group in groups:
-                self.write(";".join(group))
-        finally:
-            self.resource.timeout = old
-        self._wait_opc()
-        return removed
+        wanted = [seg.strip() for seg in _split_segments(set_text.strip())]
+        problem = ""
+        for attempt in range(1, RESTORE_ATTEMPTS + 1):
+            try:
+                self._send_groups(groups)
+                self.reconnect()
+                got = [seg.strip() for seg in _split_segments(self._read_set().strip())]
+            except BlockedCommandError:
+                raise
+            except Exception as exc:  # noqa: BLE001  timeout or I/O error: the USB link dropped
+                problem = f"{type(exc).__name__}: {exc}"
+                self._log(f"RESTORE-RETRY\tattempt {attempt}\t{problem}")
+                if attempt < RESTORE_ATTEMPTS:
+                    time.sleep(self.restore_pause_s)
+                self.reconnect()
+                continue
+            diffs = [
+                f"{a or '(missing)'!r} expected, {b or '(missing)'!r} found"
+                for a, b in itertools.zip_longest(wanted, got)
+                if a != b
+            ]
+            if not diffs:
+                return removed
+            problem = "SET? differs: " + "; ".join(diffs[:5])
+            self._log(f"RESTORE-RETRY\tattempt {attempt}\t{problem}")
+        raise RestoreError(f"restore failed after {RESTORE_ATTEMPTS} attempts. {problem}")
 
     # -- channels ---------------------------------------------------------------
 
