@@ -453,3 +453,40 @@ def test_write_refuses_blocked_queries_and_odd_input(tmp_path, cmd):
     assert result.is_error
     assert rig.opened == 0 and rig.written == []
 
+
+
+# -- USB drop on the final *OPC? ------------------------------------------------
+
+
+class OpcDropsOnce(TimedResource):
+    def query(self, cmd):
+        if cmd == "*OPC?" and not getattr(self, "dropped", False):
+            self.dropped = True
+            self.written.append(cmd)
+            raise OSError("VI_ERROR_IO")
+        return super().query(cmd)
+
+
+@pytest.mark.parametrize(
+    ("tool", "state"),
+    [("scope_run", "1"), ("scope_stop", "0"), ("scope_single", "0")],
+)
+def test_opc_drop_gives_success_with_a_warning(tmp_path, tool, state):
+    srv, rig = make(tmp_path, {"ACQuire:STATE?": state, "*ESR?": "0", "ALLEv?": '0,"No events"'})
+    rig.resource.__class__ = OpcDropsOnce
+    result = call(srv, tool, confirm=True)
+    assert not getattr(result, "is_error", False)
+    out = data(result)
+    assert "*OPC?" in out["warning"] and out["errors"] == []
+
+
+def test_autoset_opc_drop_gives_success_with_a_warning(tmp_path):
+    srv, rig = make(tmp_path, {"*ESR?": "0", "ALLEv?": '0,"No events"'})
+    rig.resource.__class__ = OpcDropsOnce
+    out = data(call(srv, "scope_autoset", confirm=True))
+    assert "autoset" in out["warning"].lower()
+
+
+def test_run_without_a_drop_has_no_warning(tmp_path):
+    srv, _ = make(tmp_path, {"*OPC?": "1", "*ESR?": "0", "ALLEv?": '0,"No events"'})
+    assert "warning" not in data(call(srv, "scope_run", confirm=True))

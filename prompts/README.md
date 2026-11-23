@@ -11,6 +11,7 @@ Cada arquivo é uma conversa do Claude Code. Rode na ordem. Só comece a próxim
 | 3 | [conversa-3-mapa.md](conversa-3-mapa.md) | Opus 5.5 | high | `claude --model opus --effort high` |
 | 4 | [conversa-4-mcp.md](conversa-4-mcp.md) | Sonnet 5.5 | medium | `claude --model sonnet --effort medium` |
 | 5 | [conversa-5-ajustes.md](conversa-5-ajustes.md) | Sonnet 5.5 | high | `claude --model sonnet --effort high` |
+| 6 | [conversa-6-usb.md](conversa-6-usb.md) | Sonnet 5.5 | high | `claude --model sonnet --effort high` |
 
 ## Como rodar
 

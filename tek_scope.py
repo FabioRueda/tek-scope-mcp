@@ -536,24 +536,49 @@ class TekScope:
     def acquire_num_avg(self, value=None):
         return self._get_set("ACQuire:NUMAVg", value, False)
 
-    def run(self) -> None:
+    def _finish(self, wanted: tuple[str, ...] | None, settle_s: float = 0) -> str | None:
+        """Wait for *OPC?. If the USB drops there, reopen the session and confirm by ACQuire:STATE?.
+
+        `wanted` is the accepted ACQuire:STATE? answers (last word, upper case); None means there is
+        nothing to ask afterwards (autoset). Returns a warning when the drop happened and the check
+        passed; raises the original error when the check fails.
+        """
+        try:
+            self._wait_opc()
+            return None
+        except Exception as exc:  # noqa: BLE001 - pyvisa VisaIOError (timeout, I/O) and OSError both mean a dropped session
+            drop = exc
+        self._log(f"OPC-DROP\t{drop!r}")
+        self.reconnect()
+        if wanted is None:
+            return "The USB dropped at *OPC?; the session was reopened. The autoset was sent; check the screen."
+        deadline = time.monotonic() + settle_s
+        while True:
+            state = self.query("ACQuire:STATE?").split()[-1].upper()
+            if state in wanted:
+                return f"The USB dropped at *OPC?; the session was reopened and ACQuire:STATE? is {state}."
+            if time.monotonic() >= deadline:
+                raise drop
+            time.sleep(0.5)
+
+    def run(self) -> str | None:
         self.write("ACQuire:STOPAfter RUNSTop")
         self.write("ACQuire:STATE RUN")
-        self._wait_opc()
+        return self._finish(("1", "RUN"))
 
-    def stop(self) -> None:
+    def stop(self) -> str | None:
         self.write("ACQuire:STATE STOP")
-        self._wait_opc()
+        return self._finish(("0", "STOP"))
 
-    def single(self) -> None:
+    def single(self) -> str | None:
         """Single sequence; *OPC? returns when the acquisition is complete."""
         self.write("ACQuire:STOPAfter SEQuence")
         self.write("ACQuire:STATE RUN")
-        self._wait_opc()
+        return self._finish(("0", "STOP"), settle_s=15)
 
-    def autoset(self) -> None:
+    def autoset(self) -> str | None:
         self.write("AUTOSet EXECute")
-        self._wait_opc()
+        return self._finish(None)
 
     # -- measurements -----------------------------------------------------------------
 

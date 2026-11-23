@@ -449,3 +449,78 @@ def test_autoset(scope):
     scope.resource.answers = {"*OPC?": "1", "BUSY?": "0"}
     scope.autoset()
     assert scope.resource.written[0] == "AUTOSet EXECute"
+
+
+# -- USB drop on the final *OPC? of run / stop / single / autoset ---------------
+
+
+class DropsOnOpc(FakeResource):
+    """The instrument leaves the USB bus right when *OPC? is asked."""
+
+    def query(self, cmd):
+        if cmd == "*OPC?":
+            self.written.append(cmd)
+            raise OSError("VI_ERROR_IO")
+        return super().query(cmd)
+
+
+@pytest.mark.parametrize(
+    ("method", "state"),
+    [("run", "1"), ("stop", "0"), ("single", "0")],
+)
+def test_opc_drop_is_confirmed_by_acquire_state(tmp_path, method, state):
+    new = FakeResource({"ACQuire:STATE?": state})
+    s = make_scope(tmp_path, DropsOnOpc(), [new])
+    warning = getattr(s, method)()
+    assert s.resource is new  # the session was reopened
+    s.close()
+    assert "*OPC?" in warning and "ACQuire:STATE?" in new.written
+
+
+def test_opc_drop_with_a_state_header_is_understood(tmp_path):
+    s = make_scope(tmp_path, DropsOnOpc(), [FakeResource({"ACQuire:STATE?": ":ACQUIRE:STATE 1"})])
+    assert s.run()
+    s.close()
+
+
+def test_opc_drop_fails_when_the_state_is_not_the_wanted_one(tmp_path):
+    s = make_scope(tmp_path, DropsOnOpc(), [FakeResource({"ACQuire:STATE?": "0"})])
+    with pytest.raises(OSError, match="VI_ERROR_IO"):
+        s.run()
+    s.close()
+
+
+def test_single_waits_while_the_acquisition_is_still_running(tmp_path, monkeypatch):
+    monkeypatch.setattr(tek_scope.time, "sleep", lambda s: None)
+    new = FakeResource({"ACQuire:STATE?": ["1", "1", "0"]})
+    s = make_scope(tmp_path, DropsOnOpc(), [new])
+    assert s.single()
+    s.close()
+
+
+def test_autoset_opc_drop_reopens_and_warns_without_checking(tmp_path):
+    new = FakeResource()
+    s = make_scope(tmp_path, DropsOnOpc(), [new])
+    warning = s.autoset()
+    s.close()
+    assert "autoset" in warning.lower() and "sent" in warning
+    assert new.written == []  # nothing is asked after reopening
+
+
+def test_normal_run_returns_no_warning(scope):
+    scope.resource.answers = {"*OPC?": "1"}
+    assert scope.run() is None
+    assert scope.stop() is None
+    assert scope.single() is None
+    assert scope.autoset() is None
+
+
+def test_write_failure_is_not_hidden_by_the_opc_rule(tmp_path):
+    class Dead(FakeResource):
+        def write(self, cmd):
+            raise OSError("VI_ERROR_IO")
+
+    s = make_scope(tmp_path, Dead(), [FakeResource()])
+    with pytest.raises(OSError):
+        s.run()
+    s.close()

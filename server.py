@@ -304,8 +304,11 @@ def create_server(
 
     def apply(applied: dict, writes: Callable[[TekScope], object]) -> dict:
         with session() as scope:
-            writes(scope)
-            return {"applied": applied, "errors": events(scope)}
+            warning = writes(scope)
+            result = {"applied": applied, "errors": events(scope)}
+            if isinstance(warning, str):
+                result["warning"] = warning
+            return result
 
     @tool()
     def scope_set_channel(
