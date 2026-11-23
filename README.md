@@ -18,7 +18,9 @@ Tested on hardware so far: opening the USB resource; `*CLS`, `*IDN?`, `*ESR?`, `
 
 The command map (build step 3) sent the query form of every documented header that has one; the replies are in [docs/scpi_map.json](docs/scpi_map.json). Not sent by design: commands without a query form, `CURVe?`, `WAVFrm?`, `HARDCopy?` and the blocklist. The only writes were `HEADer` and `VERBose`, set back at the end.
 
-Implemented but not yet run on hardware: the other channel setters (`SCAle`, `POSition`, `COUPling`, `BANdwidth`, `INVert`), horizontal scale and position, the other edge-trigger setters, `TRIGger:STATE?`, `run()`, `stop()`, `single()`, `autoset()` and `ACQuire:MODe`/`NUMAVg`. Not tested: the pyvisa-py + Zadig path, other Windows versions, other instrument models. This table is updated at the end of each build step, with what was tested and what was not.
+The command map also answered, on hardware, the queries behind the other library getters: `CH1:SCAle?`, `POSition?`, `COUPling?`, `BANdwidth?`, `INVert?`, `HORizontal:MAIn:SCAle?`, `POSition?`, the `TRIGger:MAIn:EDGE:*?` queries, `TRIGger:MAIn:MODe?`, `TRIGger:STATE?`, `ACQuire:MODe?` and `NUMAVg?`.
+
+Implemented but not yet run on hardware (build step 3 allowed no writes): the setters for channel (`SCAle`, `POSition`, `COUPling`, `BANdwidth`, `INVert`), horizontal scale and position, the other edge-trigger settings and `ACQuire:MODe`/`NUMAVg`, and `run()`, `stop()`, `single()` and `autoset()`. Not tested: the pyvisa-py + Zadig path, other Windows versions, other instrument models. This table is updated at the end of each build step, with what was tested and what was not.
 
 Known limits found on hardware:
 
@@ -27,7 +29,7 @@ Known limits found on hardware:
 - Sending the whole `SET?` text in one write can take longer than 10 s. `restore()` sends it in groups, with a 30 s timeout.
 - Reading `SET?` (and `*LRN?`) takes about 5 s.
 - A query the instrument does not know gets no reply, so the read waits for the timeout. With NI-VISA a 3 s timeout waited about 5 s.
-- After about 50 such timeouts in one VISA session, each followed by a USBTMC device clear, the device clear failed (`VI_ERROR_INV_PARAMETER`) and the next write failed (`VI_ERROR_SYSTEM_ERROR`). Reading the status byte right after an unknown command failed the same way. The instrument itself kept working: a new session answered at once. `scripts/explore_scpi.py` closes and reopens the session after every timeout instead.
+- After 37 such timeouts in one VISA session, each followed by a USBTMC device clear, the 38th device clear failed (`VI_ERROR_INV_PARAMETER`) and the next write failed (`VI_ERROR_SYSTEM_ERROR`). Reading the status byte right after an unknown command failed the same way. The instrument itself kept working: a new session answered at once. `scripts/explore_scpi.py` closes and reopens the session after every timeout instead.
 - The `WFMPre:<field>?` queries describe the `DATa:SOUrce` waveform. When that waveform is not displayed they give event 2244 and no reply; `WFMPre:CH1:<field>?` still works.
 - The instrument answers the `RS232` queries and `MEASUrement:IMMed:SOURCE2?`, which the manual lists only for other series.
 
